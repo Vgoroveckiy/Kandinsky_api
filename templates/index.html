@@ -97,6 +97,14 @@
             right: 20px;
             z-index: 1060;
         }
+
+        /* Неактивная кнопка Скачать */
+        .btn-disabled {
+            background-color: #6c757d !important;
+            border-color: #6c757d !important;
+            cursor: not-allowed !important;
+            opacity: 0.65 !important;
+    }
     </style>
 </head>
 <body>
@@ -202,7 +210,7 @@
                         
                         <!-- Кнопки действий с изображением -->
                         <div class="d-flex justify-content-center mt-3" id="imageActions" style="display: none;">
-                            <button id="downloadBtn" class="btn btn-success me-2">
+                            <button id="downloadBtn" class="btn btn-success me-2 btn-disabled" disabled>
                                 <i class="fas fa-download me-2"></i>Скачать
                             </button>
                             <button id="shareBtn" class="btn btn-info me-2">
@@ -234,7 +242,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
-                    <button type="button" id="modalDownloadBtn" class="btn btn-primary">Скачать</button>
+                    <button type="button" id="modalDownloadBtn" class="btn btn-primary btn-disabled" disabled>Скачать</button>
                 </div>
             </div>
         </div>
@@ -576,6 +584,106 @@
                     toast.remove();
                 });
             }
+
+            // Функция для управления состоянием кнопок Скачать
+            function toggleDownloadButtons(enabled) {
+                const downloadBtn = document.getElementById('downloadBtn');
+                const modalDownloadBtn = document.getElementById('modalDownloadBtn');
+                
+                if (enabled) {
+                    downloadBtn.disabled = false;
+                    modalDownloadBtn.disabled = false;
+                    downloadBtn.classList.remove('btn-disabled');
+                    modalDownloadBtn.classList.remove('btn-disabled');
+                } else {
+                    downloadBtn.disabled = true;
+                    modalDownloadBtn.disabled = true;
+                    downloadBtn.classList.add('btn-disabled');
+                    modalDownloadBtn.classList.add('btn-disabled');
+                }
+            }
+
+            // Функция для проверки статуса задачи
+            function checkTaskStatus() {
+                if (!currentTaskId) return;
+                
+                fetch(`/task/${currentTaskId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (!data.success) {
+                            throw new Error(data.error || 'Задача не найдена');
+                        }
+                        
+                        const task = data.task;
+                        
+                        // Обновляем прогресс и статус
+                        updateProgress(task.progress || 0, getStatusMessage(task.status, task.message));
+                        
+                        // Проверяем, завершена ли задача
+                        if (task.status === 'completed') {
+                            clearInterval(statusCheckInterval);
+                            
+                            // Показываем изображение
+                            if (task.image_paths && task.image_paths.length > 0) {
+                                currentImageUrls = task.image_paths.map(img => img.url);
+                                currentImagePath = task.image_paths[0].path;
+                                
+                                // Показываем первое изображение
+                                showImage(currentImageUrls[0]);
+                                
+                                // Если есть несколько изображений, показываем галерею
+                                if (currentImageUrls.length > 1) {
+                                    showGallery(task.image_paths);
+                                }
+                                
+                                // Показываем кнопки действий
+                                imageActions.style.display = 'flex';
+                                
+                                // Активируем кнопки Скачать
+                                toggleDownloadButtons(true);
+                            }
+                            
+                            enableGenerateButton();
+                            
+                        } else if (['error', 'unavailable', 'no_files'].includes(task.status)) {
+                            clearInterval(statusCheckInterval);
+                            showToast(`Ошибка: ${task.message || 'Произошла ошибка при генерации'}`, 'danger');
+                            enableGenerateButton();
+                            toggleDownloadButtons(false); // Убедимся, что кнопки неактивны
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Ошибка при проверке статуса:', error);
+                        clearInterval(statusCheckInterval);
+                        updateProgress(0, `Ошибка: ${error.message}`);
+                        showToast(`Ошибка: ${error.message}`, 'danger');
+                        enableGenerateButton();
+                        toggleDownloadButtons(false); // Убедимся, что кнопки неактивны
+                    });
+            }
+
+            // Функция для сброса результатов
+            function resetResults() {
+                previewPlaceholder.style.display = 'block';
+                previewImage.style.display = 'none';
+                imageGallery.style.display = 'none';
+                imageActions.style.display = 'none';
+                imageGallery.innerHTML = '';
+                
+                currentTaskId = null;
+                currentImageUrls = [];
+                currentImagePath = null;
+                
+                if (statusCheckInterval) {
+                    clearInterval(statusCheckInterval);
+                    statusCheckInterval = null;
+                }
+                
+                // Отключаем кнопки Скачать
+                toggleDownloadButtons(false);
+            }
+
+
         });
     </script>
     

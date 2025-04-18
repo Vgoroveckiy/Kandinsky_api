@@ -508,3 +508,75 @@
 2025-04-18 16:27:17,453 - INFO - Image saved: path=a8a12b56-8d4b-47a3-a4dc-c3c31f526746/generated_1744982837_1.png, url=/image/a8a12b56-8d4b-47a3-a4dc-c3c31f526746/generated_1744982837_1.png
 2025-04-18 16:27:17,775 - INFO - Task a8a12b56-8d4b-47a3-a4dc-c3c31f526746 image path: original=a8a12b56-8d4b-47a3-a4dc-c3c31f526746/generated_1744982837_1.png, normalized=a8a12b56-8d4b-47a3-a4dc-c3c31f526746/generated_1744982837_1.png
 2025-04-18 16:27:17,777 - INFO - Task a8a12b56-8d4b-47a3-a4dc-c3c31f526746 status: completed, progress: 100
+2025-04-18 16:32:16,906 - INFO - Logging initialized
+2025-04-18 16:32:16,978 - INFO - Initializing ConfigManager
+2025-04-18 16:32:16,979 - INFO - Configuration validated successfully
+2025-04-18 16:32:19,219 - INFO - Logging initialized
+2025-04-18 16:32:19,300 - INFO - Initializing ConfigManager
+2025-04-18 16:32:19,301 - INFO - Configuration validated successfully
+2025-04-18 16:32:59,457 - INFO - Initializing ConfigManager
+2025-04-18 16:32:59,462 - INFO - Configuration validated successfully
+2025-04-18 16:32:59,464 - INFO - FusionBrainAPI initialized with URL: https://api-key.fusionbrain.ai/
+2025-04-18 16:32:59,464 - INFO - Requesting pipeline ID from https://api-key.fusionbrain.ai/key/api/v1/pipelines
+2025-04-18 16:32:59,913 - INFO - Successfully retrieved pipeline ID: a17740da-e8a0-4816-876a-74326c5c4cef
+2025-04-18 16:32:59,915 - INFO - Checking service availability for pipeline a17740da-e8a0-4816-876a-74326c5c4cef
+2025-04-18 16:33:00,318 - INFO - Service availability status: {'status': 'ACTIVE'}
+2025-04-18 16:33:00,321 - INFO - Initiating image generation with prompt: кошка, pipeline: a17740da-e8a0-4816-876a-74326c5c4cef, width: 512, height: 512, style: default
+2025-04-18 16:33:00,652 - INFO - Image generation initiated, UUID: a7b4029b-3005-4e6c-a9d5-b85ec76e8ddc
+2025-04-18 16:33:00,654 - INFO - Checking generation status for UUID: a7b4029b-3005-4e6c-a9d5-b85ec76e8ddc
+2025-04-18 16:33:01,085 - INFO - Generation status: INITIAL, waiting...
+2025-04-18 16:33:06,515 - INFO - Generation status: INITIAL, waiting...
+2025-04-18 16:33:17,640 - INFO - Generation completed, found 1 files for UUID: a7b4029b-3005-4e6c-a9d5-b85ec76e8ddc
+2025-04-18 16:33:17,643 - INFO - Saving image to output\70192bdf-7f7b-44fa-a47b-252b6dbcd41a\generated_1744983197_1.png
+2025-04-18 16:33:17,647 - INFO - Base64 image decoded and saved to output\70192bdf-7f7b-44fa-a47b-252b6dbcd41a\generated_1744983197_1.png
+2025-04-18 16:33:17,648 - INFO - Image saved: path=70192bdf-7f7b-44fa-a47b-252b6dbcd41a/generated_1744983197_1.png, url=/image/70192bdf-7f7b-44fa-a47b-252b6dbcd41a/generated_1744983197_1.png
+2025-04-18 16:33:18,483 - INFO - Task 70192bdf-7f7b-44fa-a47b-252b6dbcd41a image path: original=70192bdf-7f7b-44fa-a47b-252b6dbcd41a/generated_1744983197_1.png, normalized=70192bdf-7f7b-44fa-a47b-252b6dbcd41a/generated_1744983197_1.png
+2025-04-18 16:33:18,492 - INFO - Task 70192bdf-7f7b-44fa-a47b-252b6dbcd41a status: completed, progress: 100
+2025-04-18 16:38:24,223 - INFO - Logging initialized
+2025-04-18 16:38:24,309 - INFO - Initializing ConfigManager
+2025-04-18 16:38:24,309 - INFO - Configuration validated successfully
+2025-04-18 16:38:26,532 - INFO - Logging initialized
+2025-04-18 16:38:26,607 - INFO - Initializing ConfigManager
+2025-04-18 16:38:26,607 - INFO - Configuration validated successfully
+2025-04-18 16:38:46,944 - INFO - Initializing ConfigManager
+2025-04-18 16:38:46,945 - INFO - Configuration validated successfully
+2025-04-18 16:38:46,948 - INFO - FusionBrainAPI initialized with URL: https://api-key.fusionbrain.ai/
+2025-04-18 16:38:46,949 - INFO - Requesting pipeline ID from https://api-key.fusionbrain.ai/key/api/v1/pipelines
+2025-04-18 16:38:47,428 - INFO - Successfully retrieved pipeline ID: a17740da-e8a0-4816-876a-74326c5c4cef
+2025-04-18 16:38:47,429 - INFO - Checking service availability for pipeline a17740da-e8a0-4816-876a-74326c5c4cef
+2025-04-18 16:38:47,887 - INFO - Service availability status: {'status': 'ACTIVE'}
+2025-04-18 16:38:47,890 - INFO - Initiating image generation with prompt: щенок, pipeline: a17740da-e8a0-4816-876a-74326c5c4cef, width: 512, height: 512, style: default
+2025-04-18 16:38:48,313 - INFO - Image generation initiated, UUID: ee91ac24-eb86-47b9-8ca6-9a15c3d6c229
+2025-04-18 16:38:48,322 - INFO - Checking generation status for UUID: ee91ac24-eb86-47b9-8ca6-9a15c3d6c229
+2025-04-18 16:38:48,747 - INFO - Generation status: INITIAL, waiting...
+2025-04-18 16:38:54,170 - INFO - Generation status: INITIAL, waiting...
+2025-04-18 16:39:04,780 - INFO - Generation completed, found 1 files for UUID: ee91ac24-eb86-47b9-8ca6-9a15c3d6c229
+2025-04-18 16:39:04,784 - INFO - Saving image to output\34902ad2-35b9-4782-8552-6429e85ea90d\generated_1744983544_1.png
+2025-04-18 16:39:04,788 - INFO - Base64 image decoded and saved to output\34902ad2-35b9-4782-8552-6429e85ea90d\generated_1744983544_1.png
+2025-04-18 16:39:04,792 - INFO - Image saved: path=34902ad2-35b9-4782-8552-6429e85ea90d/generated_1744983544_1.png, url=/image/34902ad2-35b9-4782-8552-6429e85ea90d/generated_1744983544_1.png
+2025-04-18 16:39:04,969 - INFO - Task 34902ad2-35b9-4782-8552-6429e85ea90d image path: original=34902ad2-35b9-4782-8552-6429e85ea90d/generated_1744983544_1.png, normalized=34902ad2-35b9-4782-8552-6429e85ea90d/generated_1744983544_1.png
+2025-04-18 16:39:04,980 - INFO - Task 34902ad2-35b9-4782-8552-6429e85ea90d status: completed, progress: 100
+2025-04-18 16:42:47,589 - INFO - Logging initialized
+2025-04-18 16:42:47,659 - INFO - Initializing ConfigManager
+2025-04-18 16:42:47,660 - INFO - Configuration validated successfully
+2025-04-18 16:42:50,002 - INFO - Logging initialized
+2025-04-18 16:42:50,081 - INFO - Initializing ConfigManager
+2025-04-18 16:42:50,082 - INFO - Configuration validated successfully
+2025-04-18 16:43:15,025 - INFO - Initializing ConfigManager
+2025-04-18 16:43:15,029 - INFO - Configuration validated successfully
+2025-04-18 16:43:15,031 - INFO - FusionBrainAPI initialized with URL: https://api-key.fusionbrain.ai/
+2025-04-18 16:43:15,032 - INFO - Requesting pipeline ID from https://api-key.fusionbrain.ai/key/api/v1/pipelines
+2025-04-18 16:43:15,470 - INFO - Successfully retrieved pipeline ID: a17740da-e8a0-4816-876a-74326c5c4cef
+2025-04-18 16:43:15,473 - INFO - Checking service availability for pipeline a17740da-e8a0-4816-876a-74326c5c4cef
+2025-04-18 16:43:15,906 - INFO - Service availability status: {'status': 'ACTIVE'}
+2025-04-18 16:43:15,908 - INFO - Initiating image generation with prompt: собачка, pipeline: a17740da-e8a0-4816-876a-74326c5c4cef, width: 512, height: 512, style: default
+2025-04-18 16:43:16,271 - INFO - Image generation initiated, UUID: 14b68442-c36a-4856-920e-8b4c4256362e
+2025-04-18 16:43:16,273 - INFO - Checking generation status for UUID: 14b68442-c36a-4856-920e-8b4c4256362e
+2025-04-18 16:43:16,704 - INFO - Generation status: INITIAL, waiting...
+2025-04-18 16:43:22,151 - INFO - Generation status: INITIAL, waiting...
+2025-04-18 16:43:33,090 - INFO - Generation completed, found 1 files for UUID: 14b68442-c36a-4856-920e-8b4c4256362e
+2025-04-18 16:43:33,092 - INFO - Saving image to output\2c4380d8-68ce-4793-a4e4-bc08380c1086\generated_1744983813_1.png
+2025-04-18 16:43:33,093 - INFO - Base64 image decoded and saved to output\2c4380d8-68ce-4793-a4e4-bc08380c1086\generated_1744983813_1.png
+2025-04-18 16:43:33,094 - INFO - Image saved: path=2c4380d8-68ce-4793-a4e4-bc08380c1086/generated_1744983813_1.png, url=/image/2c4380d8-68ce-4793-a4e4-bc08380c1086/generated_1744983813_1.png
+2025-04-18 16:43:34,051 - INFO - Task 2c4380d8-68ce-4793-a4e4-bc08380c1086 image path: original=2c4380d8-68ce-4793-a4e4-bc08380c1086/generated_1744983813_1.png, normalized=2c4380d8-68ce-4793-a4e4-bc08380c1086/generated_1744983813_1.png
+2025-04-18 16:43:34,060 - INFO - Task 2c4380d8-68ce-4793-a4e4-bc08380c1086 status: completed, progress: 100
