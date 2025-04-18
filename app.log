@@ -257,3 +257,199 @@
 2025-04-18 15:50:10,566 - INFO - 127.0.0.1 - - [18/Apr/2025 15:50:10] "GET /task/ff6d3710-62dd-4256-a553-3706dd5e45ad HTTP/1.1" 200 -
 2025-04-18 15:50:10,871 - INFO - 127.0.0.1 - - [18/Apr/2025 15:50:10] "GET /image/ff6d3710-62dd-4256-a553-3706dd5e45ad/generated_1744980609_1.png HTTP/1.1" 200 -
 2025-04-18 15:50:18,462 - INFO - 127.0.0.1 - - [18/Apr/2025 15:50:18] "GET /download/ff6d3710-62dd-4256-a553-3706dd5e45ad/generated_1744980609_1.png HTTP/1.1" 200 -
+2025-04-18 15:58:13,198 - INFO - Logging initialized
+2025-04-18 15:58:13,265 - INFO - Initializing ConfigManager
+2025-04-18 15:58:13,266 - INFO - Configuration validated successfully
+2025-04-18 15:58:14,223 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.188:5000
+2025-04-18 15:58:14,225 - INFO - [33mPress CTRL+C to quit[0m
+2025-04-18 15:58:14,232 - INFO -  * Restarting with stat
+2025-04-18 15:58:15,180 - INFO - Logging initialized
+2025-04-18 15:58:15,245 - INFO - Initializing ConfigManager
+2025-04-18 15:58:15,245 - INFO - Configuration validated successfully
+2025-04-18 15:58:15,266 - WARNING -  * Debugger is active!
+2025-04-18 15:58:15,279 - INFO -  * Debugger PIN: 117-900-913
+2025-04-18 15:58:23,802 - INFO - 127.0.0.1 - - [18/Apr/2025 15:58:23] "GET / HTTP/1.1" 200 -
+2025-04-18 15:58:23,874 - INFO - 127.0.0.1 - - [18/Apr/2025 15:58:23] "GET /styles HTTP/1.1" 200 -
+2025-04-18 15:58:33,994 - INFO - 127.0.0.1 - - [18/Apr/2025 15:58:33] "GET / HTTP/1.1" 200 -
+2025-04-18 15:58:34,047 - INFO - 127.0.0.1 - - [18/Apr/2025 15:58:34] "GET /styles HTTP/1.1" 200 -
+2025-04-18 16:04:20,349 - INFO - Logging initialized
+2025-04-18 16:04:20,412 - INFO - Initializing ConfigManager
+2025-04-18 16:04:20,413 - INFO - Configuration validated successfully
+2025-04-18 16:04:21,517 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.188:5000
+2025-04-18 16:04:21,518 - INFO - [33mPress CTRL+C to quit[0m
+2025-04-18 16:04:21,520 - INFO -  * Restarting with stat
+2025-04-18 16:04:22,659 - INFO - Logging initialized
+2025-04-18 16:04:22,733 - INFO - Initializing ConfigManager
+2025-04-18 16:04:22,734 - INFO - Configuration validated successfully
+2025-04-18 16:04:22,758 - WARNING -  * Debugger is active!
+2025-04-18 16:04:22,771 - INFO -  * Debugger PIN: 117-900-913
+2025-04-18 16:04:26,909 - INFO - 127.0.0.1 - - [18/Apr/2025 16:04:26] "GET / HTTP/1.1" 200 -
+2025-04-18 16:04:26,947 - INFO - 127.0.0.1 - - [18/Apr/2025 16:04:26] "GET /styles HTTP/1.1" 200 -
+2025-04-18 16:04:28,322 - INFO - 127.0.0.1 - - [18/Apr/2025 16:04:28] "GET / HTTP/1.1" 200 -
+2025-04-18 16:04:28,360 - INFO - 127.0.0.1 - - [18/Apr/2025 16:04:28] "GET /styles HTTP/1.1" 200 -
+2025-04-18 16:04:48,974 - INFO - Initializing ConfigManager
+2025-04-18 16:04:48,975 - INFO - 127.0.0.1 - - [18/Apr/2025 16:04:48] "POST /generate HTTP/1.1" 200 -
+2025-04-18 16:04:48,976 - INFO - Configuration validated successfully
+2025-04-18 16:04:48,980 - INFO - FusionBrainAPI initialized with URL: https://api-key.fusionbrain.ai/
+2025-04-18 16:04:48,981 - INFO - Requesting pipeline ID from https://api-key.fusionbrain.ai/key/api/v1/pipelines
+2025-04-18 16:04:49,333 - INFO - Successfully retrieved pipeline ID: a17740da-e8a0-4816-876a-74326c5c4cef
+2025-04-18 16:04:49,334 - INFO - Checking service availability for pipeline a17740da-e8a0-4816-876a-74326c5c4cef
+2025-04-18 16:04:49,747 - INFO - Service availability status: {'status': 'ACTIVE'}
+2025-04-18 16:04:49,748 - INFO - Initiating image generation with prompt: Красивый закат в лесу, pipeline: a17740da-e8a0-4816-876a-74326c5c4cef, width: 512, height: 512, style: default
+2025-04-18 16:04:49,989 - INFO - 127.0.0.1 - - [18/Apr/2025 16:04:49] "GET /task/476aaaa1-71f7-4972-9401-f68432b2fc4c HTTP/1.1" 200 -
+2025-04-18 16:04:50,098 - INFO - Image generation initiated, UUID: c78d9231-bded-4a34-b454-c56287dc8c41
+2025-04-18 16:04:50,098 - INFO - Checking generation status for UUID: c78d9231-bded-4a34-b454-c56287dc8c41
+2025-04-18 16:04:50,443 - INFO - Generation status: INITIAL, waiting...
+2025-04-18 16:04:50,991 - INFO - 127.0.0.1 - - [18/Apr/2025 16:04:50] "GET /task/476aaaa1-71f7-4972-9401-f68432b2fc4c HTTP/1.1" 200 -
+2025-04-18 16:04:51,988 - INFO - 127.0.0.1 - - [18/Apr/2025 16:04:51] "GET /task/476aaaa1-71f7-4972-9401-f68432b2fc4c HTTP/1.1" 200 -
+2025-04-18 16:04:52,999 - INFO - 127.0.0.1 - - [18/Apr/2025 16:04:52] "GET /task/476aaaa1-71f7-4972-9401-f68432b2fc4c HTTP/1.1" 200 -
+2025-04-18 16:04:53,996 - INFO - 127.0.0.1 - - [18/Apr/2025 16:04:53] "GET /task/476aaaa1-71f7-4972-9401-f68432b2fc4c HTTP/1.1" 200 -
+2025-04-18 16:04:54,991 - INFO - 127.0.0.1 - - [18/Apr/2025 16:04:54] "GET /task/476aaaa1-71f7-4972-9401-f68432b2fc4c HTTP/1.1" 200 -
+2025-04-18 16:04:55,797 - INFO - Generation status: INITIAL, waiting...
+2025-04-18 16:04:55,990 - INFO - 127.0.0.1 - - [18/Apr/2025 16:04:55] "GET /task/476aaaa1-71f7-4972-9401-f68432b2fc4c HTTP/1.1" 200 -
+2025-04-18 16:04:56,995 - INFO - 127.0.0.1 - - [18/Apr/2025 16:04:56] "GET /task/476aaaa1-71f7-4972-9401-f68432b2fc4c HTTP/1.1" 200 -
+2025-04-18 16:04:57,990 - INFO - 127.0.0.1 - - [18/Apr/2025 16:04:57] "GET /task/476aaaa1-71f7-4972-9401-f68432b2fc4c HTTP/1.1" 200 -
+2025-04-18 16:04:58,984 - INFO - 127.0.0.1 - - [18/Apr/2025 16:04:58] "GET /task/476aaaa1-71f7-4972-9401-f68432b2fc4c HTTP/1.1" 200 -
+2025-04-18 16:04:59,988 - INFO - 127.0.0.1 - - [18/Apr/2025 16:04:59] "GET /task/476aaaa1-71f7-4972-9401-f68432b2fc4c HTTP/1.1" 200 -
+2025-04-18 16:05:00,990 - INFO - 127.0.0.1 - - [18/Apr/2025 16:05:00] "GET /task/476aaaa1-71f7-4972-9401-f68432b2fc4c HTTP/1.1" 200 -
+2025-04-18 16:05:01,992 - INFO - 127.0.0.1 - - [18/Apr/2025 16:05:01] "GET /task/476aaaa1-71f7-4972-9401-f68432b2fc4c HTTP/1.1" 200 -
+2025-04-18 16:05:02,992 - INFO - 127.0.0.1 - - [18/Apr/2025 16:05:02] "GET /task/476aaaa1-71f7-4972-9401-f68432b2fc4c HTTP/1.1" 200 -
+2025-04-18 16:05:03,994 - INFO - 127.0.0.1 - - [18/Apr/2025 16:05:03] "GET /task/476aaaa1-71f7-4972-9401-f68432b2fc4c HTTP/1.1" 200 -
+2025-04-18 16:05:04,994 - INFO - 127.0.0.1 - - [18/Apr/2025 16:05:04] "GET /task/476aaaa1-71f7-4972-9401-f68432b2fc4c HTTP/1.1" 200 -
+2025-04-18 16:05:05,947 - INFO - Generation status: INITIAL, waiting...
+2025-04-18 16:05:05,993 - INFO - 127.0.0.1 - - [18/Apr/2025 16:05:05] "GET /task/476aaaa1-71f7-4972-9401-f68432b2fc4c HTTP/1.1" 200 -
+2025-04-18 16:05:06,994 - INFO - 127.0.0.1 - - [18/Apr/2025 16:05:06] "GET /task/476aaaa1-71f7-4972-9401-f68432b2fc4c HTTP/1.1" 200 -
+2025-04-18 16:05:07,998 - INFO - 127.0.0.1 - - [18/Apr/2025 16:05:07] "GET /task/476aaaa1-71f7-4972-9401-f68432b2fc4c HTTP/1.1" 200 -
+2025-04-18 16:05:08,993 - INFO - 127.0.0.1 - - [18/Apr/2025 16:05:08] "GET /task/476aaaa1-71f7-4972-9401-f68432b2fc4c HTTP/1.1" 200 -
+2025-04-18 16:05:09,985 - INFO - 127.0.0.1 - - [18/Apr/2025 16:05:09] "GET /task/476aaaa1-71f7-4972-9401-f68432b2fc4c HTTP/1.1" 200 -
+2025-04-18 16:05:10,987 - INFO - 127.0.0.1 - - [18/Apr/2025 16:05:10] "GET /task/476aaaa1-71f7-4972-9401-f68432b2fc4c HTTP/1.1" 200 -
+2025-04-18 16:05:11,985 - INFO - 127.0.0.1 - - [18/Apr/2025 16:05:11] "GET /task/476aaaa1-71f7-4972-9401-f68432b2fc4c HTTP/1.1" 200 -
+2025-04-18 16:05:12,986 - INFO - 127.0.0.1 - - [18/Apr/2025 16:05:12] "GET /task/476aaaa1-71f7-4972-9401-f68432b2fc4c HTTP/1.1" 200 -
+2025-04-18 16:05:13,991 - INFO - 127.0.0.1 - - [18/Apr/2025 16:05:13] "GET /task/476aaaa1-71f7-4972-9401-f68432b2fc4c HTTP/1.1" 200 -
+2025-04-18 16:05:14,988 - INFO - 127.0.0.1 - - [18/Apr/2025 16:05:14] "GET /task/476aaaa1-71f7-4972-9401-f68432b2fc4c HTTP/1.1" 200 -
+2025-04-18 16:05:15,986 - INFO - 127.0.0.1 - - [18/Apr/2025 16:05:15] "GET /task/476aaaa1-71f7-4972-9401-f68432b2fc4c HTTP/1.1" 200 -
+2025-04-18 16:05:16,995 - INFO - 127.0.0.1 - - [18/Apr/2025 16:05:16] "GET /task/476aaaa1-71f7-4972-9401-f68432b2fc4c HTTP/1.1" 200 -
+2025-04-18 16:05:17,989 - INFO - 127.0.0.1 - - [18/Apr/2025 16:05:17] "GET /task/476aaaa1-71f7-4972-9401-f68432b2fc4c HTTP/1.1" 200 -
+2025-04-18 16:05:18,998 - INFO - 127.0.0.1 - - [18/Apr/2025 16:05:18] "GET /task/476aaaa1-71f7-4972-9401-f68432b2fc4c HTTP/1.1" 200 -
+2025-04-18 16:05:20,000 - INFO - 127.0.0.1 - - [18/Apr/2025 16:05:20] "GET /task/476aaaa1-71f7-4972-9401-f68432b2fc4c HTTP/1.1" 200 -
+2025-04-18 16:05:20,987 - INFO - 127.0.0.1 - - [18/Apr/2025 16:05:20] "GET /task/476aaaa1-71f7-4972-9401-f68432b2fc4c HTTP/1.1" 200 -
+2025-04-18 16:05:21,989 - INFO - 127.0.0.1 - - [18/Apr/2025 16:05:21] "GET /task/476aaaa1-71f7-4972-9401-f68432b2fc4c HTTP/1.1" 200 -
+2025-04-18 16:05:22,985 - INFO - 127.0.0.1 - - [18/Apr/2025 16:05:22] "GET /task/476aaaa1-71f7-4972-9401-f68432b2fc4c HTTP/1.1" 200 -
+2025-04-18 16:05:23,984 - INFO - 127.0.0.1 - - [18/Apr/2025 16:05:23] "GET /task/476aaaa1-71f7-4972-9401-f68432b2fc4c HTTP/1.1" 200 -
+2025-04-18 16:05:24,987 - INFO - 127.0.0.1 - - [18/Apr/2025 16:05:24] "GET /task/476aaaa1-71f7-4972-9401-f68432b2fc4c HTTP/1.1" 200 -
+2025-04-18 16:05:25,711 - INFO - Generation completed, found 1 files for UUID: c78d9231-bded-4a34-b454-c56287dc8c41
+2025-04-18 16:05:25,713 - INFO - Saving image to output\476aaaa1-71f7-4972-9401-f68432b2fc4c\generated_1744981525_1.png
+2025-04-18 16:05:25,714 - INFO - Base64 image decoded and saved to output\476aaaa1-71f7-4972-9401-f68432b2fc4c\generated_1744981525_1.png
+2025-04-18 16:05:25,715 - INFO - Image saved: path=476aaaa1-71f7-4972-9401-f68432b2fc4c/generated_1744981525_1.png, url=/image/476aaaa1-71f7-4972-9401-f68432b2fc4c/generated_1744981525_1.png
+2025-04-18 16:05:25,986 - INFO - Task 476aaaa1-71f7-4972-9401-f68432b2fc4c image path: original=476aaaa1-71f7-4972-9401-f68432b2fc4c/generated_1744981525_1.png, normalized=476aaaa1-71f7-4972-9401-f68432b2fc4c/generated_1744981525_1.png
+2025-04-18 16:05:25,987 - INFO - Task 476aaaa1-71f7-4972-9401-f68432b2fc4c status: completed, progress: 100
+2025-04-18 16:05:25,988 - INFO - 127.0.0.1 - - [18/Apr/2025 16:05:25] "GET /task/476aaaa1-71f7-4972-9401-f68432b2fc4c HTTP/1.1" 200 -
+2025-04-18 16:05:26,165 - INFO - 127.0.0.1 - - [18/Apr/2025 16:05:26] "GET /image/476aaaa1-71f7-4972-9401-f68432b2fc4c/generated_1744981525_1.png HTTP/1.1" 200 -
+2025-04-18 16:05:31,101 - INFO - 127.0.0.1 - - [18/Apr/2025 16:05:31] "GET /download/476aaaa1-71f7-4972-9401-f68432b2fc4c/generated_1744981525_1.png HTTP/1.1" 200 -
+2025-04-18 16:06:13,644 - INFO -  * Detected change in 'd:\\PythonProjects\\Kandinsky_api\\app.py', reloading
+2025-04-18 16:06:13,718 - INFO -  * Restarting with stat
+2025-04-18 16:06:14,737 - INFO - Logging initialized
+2025-04-18 16:06:14,811 - INFO - Initializing ConfigManager
+2025-04-18 16:06:14,811 - INFO - Configuration validated successfully
+2025-04-18 16:06:14,835 - WARNING -  * Debugger is active!
+2025-04-18 16:06:14,847 - INFO -  * Debugger PIN: 117-900-913
+2025-04-18 16:06:22,737 - INFO - 127.0.0.1 - - [18/Apr/2025 16:06:22] "GET / HTTP/1.1" 200 -
+2025-04-18 16:06:22,782 - INFO - 127.0.0.1 - - [18/Apr/2025 16:06:22] "GET /styles HTTP/1.1" 200 -
+2025-04-18 16:06:32,369 - INFO - 127.0.0.1 - - [18/Apr/2025 16:06:32] "GET / HTTP/1.1" 200 -
+2025-04-18 16:06:32,409 - INFO - 127.0.0.1 - - [18/Apr/2025 16:06:32] "GET /styles HTTP/1.1" 200 -
+2025-04-18 16:06:47,352 - INFO - Initializing ConfigManager
+2025-04-18 16:06:47,353 - INFO - 127.0.0.1 - - [18/Apr/2025 16:06:47] "POST /generate HTTP/1.1" 200 -
+2025-04-18 16:06:47,355 - INFO - Configuration validated successfully
+2025-04-18 16:06:47,361 - INFO - FusionBrainAPI initialized with URL: https://api-key.fusionbrain.ai/
+2025-04-18 16:06:47,364 - INFO - Requesting pipeline ID from https://api-key.fusionbrain.ai/key/api/v1/pipelines
+2025-04-18 16:06:47,811 - INFO - Successfully retrieved pipeline ID: a17740da-e8a0-4816-876a-74326c5c4cef
+2025-04-18 16:06:47,812 - INFO - Checking service availability for pipeline a17740da-e8a0-4816-876a-74326c5c4cef
+2025-04-18 16:06:48,160 - INFO - Service availability status: {'status': 'ACTIVE'}
+2025-04-18 16:06:48,162 - INFO - Initiating image generation with prompt: Восход на море, pipeline: a17740da-e8a0-4816-876a-74326c5c4cef, width: 512, height: 512, style: default
+2025-04-18 16:06:48,366 - INFO - 127.0.0.1 - - [18/Apr/2025 16:06:48] "GET /task/30737ded-ae02-4682-8d3a-51345307e045 HTTP/1.1" 200 -
+2025-04-18 16:06:48,452 - INFO - Image generation initiated, UUID: 34b0df83-da80-4e68-9625-598ad690562d
+2025-04-18 16:06:48,452 - INFO - Checking generation status for UUID: 34b0df83-da80-4e68-9625-598ad690562d
+2025-04-18 16:06:49,204 - INFO - Generation status: INITIAL, waiting...
+2025-04-18 16:06:49,365 - INFO - 127.0.0.1 - - [18/Apr/2025 16:06:49] "GET /task/30737ded-ae02-4682-8d3a-51345307e045 HTTP/1.1" 200 -
+2025-04-18 16:06:50,369 - INFO - 127.0.0.1 - - [18/Apr/2025 16:06:50] "GET /task/30737ded-ae02-4682-8d3a-51345307e045 HTTP/1.1" 200 -
+2025-04-18 16:06:51,368 - INFO - 127.0.0.1 - - [18/Apr/2025 16:06:51] "GET /task/30737ded-ae02-4682-8d3a-51345307e045 HTTP/1.1" 200 -
+2025-04-18 16:06:52,370 - INFO - 127.0.0.1 - - [18/Apr/2025 16:06:52] "GET /task/30737ded-ae02-4682-8d3a-51345307e045 HTTP/1.1" 200 -
+2025-04-18 16:06:53,365 - INFO - 127.0.0.1 - - [18/Apr/2025 16:06:53] "GET /task/30737ded-ae02-4682-8d3a-51345307e045 HTTP/1.1" 200 -
+2025-04-18 16:06:54,376 - INFO - 127.0.0.1 - - [18/Apr/2025 16:06:54] "GET /task/30737ded-ae02-4682-8d3a-51345307e045 HTTP/1.1" 200 -
+2025-04-18 16:06:54,568 - INFO - Generation status: INITIAL, waiting...
+2025-04-18 16:06:55,495 - INFO - 127.0.0.1 - - [18/Apr/2025 16:06:55] "GET /task/30737ded-ae02-4682-8d3a-51345307e045 HTTP/1.1" 200 -
+2025-04-18 16:06:56,369 - INFO - 127.0.0.1 - - [18/Apr/2025 16:06:56] "GET /task/30737ded-ae02-4682-8d3a-51345307e045 HTTP/1.1" 200 -
+2025-04-18 16:06:57,368 - INFO - 127.0.0.1 - - [18/Apr/2025 16:06:57] "GET /task/30737ded-ae02-4682-8d3a-51345307e045 HTTP/1.1" 200 -
+2025-04-18 16:06:58,420 - INFO - 127.0.0.1 - - [18/Apr/2025 16:06:58] "GET /task/30737ded-ae02-4682-8d3a-51345307e045 HTTP/1.1" 200 -
+2025-04-18 16:06:59,367 - INFO - 127.0.0.1 - - [18/Apr/2025 16:06:59] "GET /task/30737ded-ae02-4682-8d3a-51345307e045 HTTP/1.1" 200 -
+2025-04-18 16:07:00,365 - INFO - 127.0.0.1 - - [18/Apr/2025 16:07:00] "GET /task/30737ded-ae02-4682-8d3a-51345307e045 HTTP/1.1" 200 -
+2025-04-18 16:07:01,366 - INFO - 127.0.0.1 - - [18/Apr/2025 16:07:01] "GET /task/30737ded-ae02-4682-8d3a-51345307e045 HTTP/1.1" 200 -
+2025-04-18 16:07:02,376 - INFO - 127.0.0.1 - - [18/Apr/2025 16:07:02] "GET /task/30737ded-ae02-4682-8d3a-51345307e045 HTTP/1.1" 200 -
+2025-04-18 16:07:03,377 - INFO - 127.0.0.1 - - [18/Apr/2025 16:07:03] "GET /task/30737ded-ae02-4682-8d3a-51345307e045 HTTP/1.1" 200 -
+2025-04-18 16:07:04,377 - INFO - 127.0.0.1 - - [18/Apr/2025 16:07:04] "GET /task/30737ded-ae02-4682-8d3a-51345307e045 HTTP/1.1" 200 -
+2025-04-18 16:07:04,969 - INFO - Generation status: INITIAL, waiting...
+2025-04-18 16:07:05,367 - INFO - 127.0.0.1 - - [18/Apr/2025 16:07:05] "GET /task/30737ded-ae02-4682-8d3a-51345307e045 HTTP/1.1" 200 -
+2025-04-18 16:07:06,372 - INFO - 127.0.0.1 - - [18/Apr/2025 16:07:06] "GET /task/30737ded-ae02-4682-8d3a-51345307e045 HTTP/1.1" 200 -
+2025-04-18 16:07:07,377 - INFO - 127.0.0.1 - - [18/Apr/2025 16:07:07] "GET /task/30737ded-ae02-4682-8d3a-51345307e045 HTTP/1.1" 200 -
+2025-04-18 16:07:08,376 - INFO - 127.0.0.1 - - [18/Apr/2025 16:07:08] "GET /task/30737ded-ae02-4682-8d3a-51345307e045 HTTP/1.1" 200 -
+2025-04-18 16:07:09,370 - INFO - 127.0.0.1 - - [18/Apr/2025 16:07:09] "GET /task/30737ded-ae02-4682-8d3a-51345307e045 HTTP/1.1" 200 -
+2025-04-18 16:07:10,369 - INFO - 127.0.0.1 - - [18/Apr/2025 16:07:10] "GET /task/30737ded-ae02-4682-8d3a-51345307e045 HTTP/1.1" 200 -
+2025-04-18 16:07:11,364 - INFO - 127.0.0.1 - - [18/Apr/2025 16:07:11] "GET /task/30737ded-ae02-4682-8d3a-51345307e045 HTTP/1.1" 200 -
+2025-04-18 16:07:12,364 - INFO - 127.0.0.1 - - [18/Apr/2025 16:07:12] "GET /task/30737ded-ae02-4682-8d3a-51345307e045 HTTP/1.1" 200 -
+2025-04-18 16:07:13,367 - INFO - 127.0.0.1 - - [18/Apr/2025 16:07:13] "GET /task/30737ded-ae02-4682-8d3a-51345307e045 HTTP/1.1" 200 -
+2025-04-18 16:07:14,371 - INFO - 127.0.0.1 - - [18/Apr/2025 16:07:14] "GET /task/30737ded-ae02-4682-8d3a-51345307e045 HTTP/1.1" 200 -
+2025-04-18 16:07:15,377 - INFO - 127.0.0.1 - - [18/Apr/2025 16:07:15] "GET /task/30737ded-ae02-4682-8d3a-51345307e045 HTTP/1.1" 200 -
+2025-04-18 16:07:16,374 - INFO - 127.0.0.1 - - [18/Apr/2025 16:07:16] "GET /task/30737ded-ae02-4682-8d3a-51345307e045 HTTP/1.1" 200 -
+2025-04-18 16:07:17,381 - INFO - 127.0.0.1 - - [18/Apr/2025 16:07:17] "GET /task/30737ded-ae02-4682-8d3a-51345307e045 HTTP/1.1" 200 -
+2025-04-18 16:07:18,379 - INFO - 127.0.0.1 - - [18/Apr/2025 16:07:18] "GET /task/30737ded-ae02-4682-8d3a-51345307e045 HTTP/1.1" 200 -
+2025-04-18 16:07:19,375 - INFO - 127.0.0.1 - - [18/Apr/2025 16:07:19] "GET /task/30737ded-ae02-4682-8d3a-51345307e045 HTTP/1.1" 200 -
+2025-04-18 16:07:20,379 - INFO - 127.0.0.1 - - [18/Apr/2025 16:07:20] "GET /task/30737ded-ae02-4682-8d3a-51345307e045 HTTP/1.1" 200 -
+2025-04-18 16:07:21,372 - INFO - 127.0.0.1 - - [18/Apr/2025 16:07:21] "GET /task/30737ded-ae02-4682-8d3a-51345307e045 HTTP/1.1" 200 -
+2025-04-18 16:07:22,370 - INFO - 127.0.0.1 - - [18/Apr/2025 16:07:22] "GET /task/30737ded-ae02-4682-8d3a-51345307e045 HTTP/1.1" 200 -
+2025-04-18 16:07:23,365 - INFO - 127.0.0.1 - - [18/Apr/2025 16:07:23] "GET /task/30737ded-ae02-4682-8d3a-51345307e045 HTTP/1.1" 200 -
+2025-04-18 16:07:24,370 - INFO - 127.0.0.1 - - [18/Apr/2025 16:07:24] "GET /task/30737ded-ae02-4682-8d3a-51345307e045 HTTP/1.1" 200 -
+2025-04-18 16:07:25,369 - INFO - 127.0.0.1 - - [18/Apr/2025 16:07:25] "GET /task/30737ded-ae02-4682-8d3a-51345307e045 HTTP/1.1" 200 -
+2025-04-18 16:07:25,986 - INFO - Generation completed, found 1 files for UUID: 34b0df83-da80-4e68-9625-598ad690562d
+2025-04-18 16:07:25,988 - INFO - Saving image to output\30737ded-ae02-4682-8d3a-51345307e045\generated_1744981645_1.png
+2025-04-18 16:07:25,989 - INFO - Base64 image decoded and saved to output\30737ded-ae02-4682-8d3a-51345307e045\generated_1744981645_1.png
+2025-04-18 16:07:25,990 - INFO - Image saved: path=30737ded-ae02-4682-8d3a-51345307e045/generated_1744981645_1.png, url=/image/30737ded-ae02-4682-8d3a-51345307e045/generated_1744981645_1.png
+2025-04-18 16:07:26,375 - INFO - Task 30737ded-ae02-4682-8d3a-51345307e045 status: completed, progress: 100
+2025-04-18 16:07:26,378 - INFO - 127.0.0.1 - - [18/Apr/2025 16:07:26] "GET /task/30737ded-ae02-4682-8d3a-51345307e045 HTTP/1.1" 200 -
+2025-04-18 16:07:26,549 - INFO - 127.0.0.1 - - [18/Apr/2025 16:07:26] "GET /image/30737ded-ae02-4682-8d3a-51345307e045/generated_1744981645_1.png HTTP/1.1" 200 -
+2025-04-18 16:08:38,937 - INFO -  * Detected change in 'd:\\PythonProjects\\Kandinsky_api\\app.py', reloading
+2025-04-18 16:08:39,022 - INFO -  * Restarting with stat
+2025-04-18 16:08:40,217 - INFO - Logging initialized
+2025-04-18 16:08:40,296 - INFO - Initializing ConfigManager
+2025-04-18 16:08:40,297 - INFO - Configuration validated successfully
+2025-04-18 16:08:40,320 - WARNING -  * Debugger is active!
+2025-04-18 16:08:40,332 - INFO -  * Debugger PIN: 117-900-913
+2025-04-18 16:11:34,483 - INFO - Logging initialized
+2025-04-18 16:11:34,547 - INFO - Initializing ConfigManager
+2025-04-18 16:11:34,548 - INFO - Configuration validated successfully
+2025-04-18 16:11:36,589 - INFO - Logging initialized
+2025-04-18 16:11:36,652 - INFO - Initializing ConfigManager
+2025-04-18 16:11:36,653 - INFO - Configuration validated successfully
+2025-04-18 16:12:01,294 - INFO - Initializing ConfigManager
+2025-04-18 16:12:01,296 - INFO - Configuration validated successfully
+2025-04-18 16:12:01,297 - INFO - FusionBrainAPI initialized with URL: https://api-key.fusionbrain.ai/
+2025-04-18 16:12:01,298 - INFO - Requesting pipeline ID from https://api-key.fusionbrain.ai/key/api/v1/pipelines
+2025-04-18 16:12:01,844 - INFO - Successfully retrieved pipeline ID: a17740da-e8a0-4816-876a-74326c5c4cef
+2025-04-18 16:12:01,845 - INFO - Checking service availability for pipeline a17740da-e8a0-4816-876a-74326c5c4cef
+2025-04-18 16:12:02,139 - INFO - Service availability status: {'status': 'ACTIVE'}
+2025-04-18 16:12:02,141 - INFO - Initiating image generation with prompt: закат на море, pipeline: a17740da-e8a0-4816-876a-74326c5c4cef, width: 512, height: 512, style: default
+2025-04-18 16:12:02,455 - INFO - Image generation initiated, UUID: d1d10d63-214a-4ce2-a00f-e7d2cfc61c42
+2025-04-18 16:12:02,458 - INFO - Checking generation status for UUID: d1d10d63-214a-4ce2-a00f-e7d2cfc61c42
+2025-04-18 16:12:02,887 - INFO - Generation status: INITIAL, waiting...
+2025-04-18 16:12:08,189 - INFO - Generation status: INITIAL, waiting...
+2025-04-18 16:12:19,072 - INFO - Generation completed, found 1 files for UUID: d1d10d63-214a-4ce2-a00f-e7d2cfc61c42
+2025-04-18 16:12:19,075 - INFO - Saving image to output\852b33db-a619-454a-8c25-fea9cf82a274\generated_1744981939_1.png
+2025-04-18 16:12:19,077 - INFO - Base64 image decoded and saved to output\852b33db-a619-454a-8c25-fea9cf82a274\generated_1744981939_1.png
+2025-04-18 16:12:19,081 - INFO - Image saved: path=852b33db-a619-454a-8c25-fea9cf82a274/generated_1744981939_1.png, url=/image/852b33db-a619-454a-8c25-fea9cf82a274/generated_1744981939_1.png
+2025-04-18 16:12:19,320 - INFO - Task 852b33db-a619-454a-8c25-fea9cf82a274 image path: original=852b33db-a619-454a-8c25-fea9cf82a274/generated_1744981939_1.png, normalized=852b33db-a619-454a-8c25-fea9cf82a274/generated_1744981939_1.png
+2025-04-18 16:12:19,321 - INFO - Task 852b33db-a619-454a-8c25-fea9cf82a274 status: completed, progress: 100

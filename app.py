@@ -9,6 +9,7 @@ from datetime import datetime
 from logging.handlers import RotatingFileHandler
 from threading import Thread
 
+from dotenv import load_dotenv
 from flask import Flask, jsonify, render_template, request, send_from_directory, session
 from werkzeug.utils import secure_filename
 
@@ -16,36 +17,44 @@ from werkzeug.utils import secure_filename
 from client_con import ConfigManager, FusionBrainAPI, ImageHandler
 from flask_session import Session
 
+# Загружаем переменные из .env
+load_dotenv()
+
+# Получаем параметры логирования из .env
+log_file = os.getenv("LOG_FILE", "app.log")  # По умолчанию app.log
+log_max_size_mb = float(os.getenv("LOG_MAX_SIZE_MB", 1))  # По умолчанию 1 МБ
+log_backup_count = int(os.getenv("LOG_BACKUP_COUNT", 3))  # По умолчанию 3 файлов
+
+# Преобразуем размер в байты (1 МБ = 1024 * 1024 байт)
+log_max_size = int(log_max_size_mb * 1024 * 1024)
+
 # Настройка корневого логгера
-# Настройка корневого логгера
-logging.getLogger("").setLevel(logging.INFO)
+if not logging.getLogger("").handlers:
+    logging.getLogger("").setLevel(logging.INFO)
+    file_handler = RotatingFileHandler(
+        log_file, maxBytes=log_max_size, backupCount=log_backup_count, encoding="utf-8"
+    )
+    file_handler.setLevel(logging.INFO)
+    file_handler.setFormatter(
+        logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
+    )
+    logging.getLogger("").addHandler(file_handler)
+    console_handler = logging.StreamHandler()
+    console_handler.setLevel(logging.INFO)
+    console_handler.setFormatter(
+        logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
+    )
+    logging.getLogger("").addHandler(console_handler)
 
-# Очищаем существующие обработчики, чтобы избежать дублирования
-logging.getLogger("").handlers.clear()
-
-# Обработчик для файла с ротацией
-log_file = "app.log"
-max_log_size = 5 * 1024 * 1024  # 5 МБ в байтах
-backup_count = 5  # Максимум 5 резервных файлов
-file_handler = RotatingFileHandler(
-    log_file, maxBytes=max_log_size, backupCount=backup_count, encoding="utf-8"
-)
-file_handler.setLevel(logging.INFO)
-file_handler.setFormatter(
-    logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
-)
-logging.getLogger("").addHandler(file_handler)
-
-# Обработчик для консоли
-console_handler = logging.StreamHandler()
-console_handler.setLevel(logging.INFO)
-console_handler.setFormatter(
-    logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
-)
-logging.getLogger("").addHandler(console_handler)
+# Отключение логов Werkzeug для HTTP-запросов
+werkzeug_logger = logging.getLogger("werkzeug")
+werkzeug_logger.disabled = True  # Полностью отключаем логгер werkzeug
+werkzeug_logger.handlers = []  # Удаляем любые обработчики
+werkzeug_logger.propagate = False  # Не передаём сообщения корневому логгеру
 
 # Логгер для текущего модуля
 logger = logging.getLogger(__name__)
+
 
 # Тестовое сообщение для проверки
 logger.info("Logging initialized")
@@ -233,7 +242,11 @@ def task_status(task_id):
             logger.info(
                 f"Task {task_id} image path: original={original_path}, normalized={img['path']}"
             )
-    logger.info(f"Returning task data: {task_data}")
+    # Логируем только завершение или ошибки
+    if task_data.get("status") in ["completed", "error"]:
+        logger.info(
+            f"Task {task_id} status: {task_data['status']}, progress: {task_data['progress']}"
+        )
     return jsonify({"success": True, "task": task_data})
 
 
