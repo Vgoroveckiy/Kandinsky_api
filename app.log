@@ -453,3 +453,27 @@
 2025-04-18 16:12:19,081 - INFO - Image saved: path=852b33db-a619-454a-8c25-fea9cf82a274/generated_1744981939_1.png, url=/image/852b33db-a619-454a-8c25-fea9cf82a274/generated_1744981939_1.png
 2025-04-18 16:12:19,320 - INFO - Task 852b33db-a619-454a-8c25-fea9cf82a274 image path: original=852b33db-a619-454a-8c25-fea9cf82a274/generated_1744981939_1.png, normalized=852b33db-a619-454a-8c25-fea9cf82a274/generated_1744981939_1.png
 2025-04-18 16:12:19,321 - INFO - Task 852b33db-a619-454a-8c25-fea9cf82a274 status: completed, progress: 100
+2025-04-18 16:16:04,295 - INFO - Logging initialized
+2025-04-18 16:16:04,372 - INFO - Initializing ConfigManager
+2025-04-18 16:16:04,372 - INFO - Configuration validated successfully
+2025-04-18 16:16:06,497 - INFO - Logging initialized
+2025-04-18 16:16:06,566 - INFO - Initializing ConfigManager
+2025-04-18 16:16:06,567 - INFO - Configuration validated successfully
+2025-04-18 16:17:13,564 - INFO - Initializing ConfigManager
+2025-04-18 16:17:13,574 - INFO - Configuration validated successfully
+2025-04-18 16:17:13,579 - INFO - FusionBrainAPI initialized with URL: https://api-key.fusionbrain.ai/
+2025-04-18 16:17:13,581 - INFO - Requesting pipeline ID from https://api-key.fusionbrain.ai/key/api/v1/pipelines
+2025-04-18 16:17:14,067 - INFO - Successfully retrieved pipeline ID: a17740da-e8a0-4816-876a-74326c5c4cef
+2025-04-18 16:17:14,070 - INFO - Checking service availability for pipeline a17740da-e8a0-4816-876a-74326c5c4cef
+2025-04-18 16:17:14,489 - INFO - Service availability status: {'status': 'ACTIVE'}
+2025-04-18 16:17:14,491 - INFO - Initiating image generation with prompt: красивый летний закат в Москве. красивая перспектива, pipeline: a17740da-e8a0-4816-876a-74326c5c4cef, width: 512, height: 512, style: default
+2025-04-18 16:17:14,927 - INFO - Image generation initiated, UUID: 0416c5a0-972b-4710-af67-27d02e34bcd5
+2025-04-18 16:17:14,936 - INFO - Checking generation status for UUID: 0416c5a0-972b-4710-af67-27d02e34bcd5
+2025-04-18 16:17:15,254 - INFO - Generation status: INITIAL, waiting...
+2025-04-18 16:17:20,684 - INFO - Generation status: INITIAL, waiting...
+2025-04-18 16:17:31,091 - INFO - Generation completed, found 1 files for UUID: 0416c5a0-972b-4710-af67-27d02e34bcd5
+2025-04-18 16:17:31,095 - INFO - Saving image to output\3471cb6c-f421-4cbf-b488-baba59d8ec67\generated_1744982251_1.png
+2025-04-18 16:17:31,098 - INFO - Base64 image decoded and saved to output\3471cb6c-f421-4cbf-b488-baba59d8ec67\generated_1744982251_1.png
+2025-04-18 16:17:31,106 - INFO - Image saved: path=3471cb6c-f421-4cbf-b488-baba59d8ec67/generated_1744982251_1.png, url=/image/3471cb6c-f421-4cbf-b488-baba59d8ec67/generated_1744982251_1.png
+2025-04-18 16:17:31,582 - INFO - Task 3471cb6c-f421-4cbf-b488-baba59d8ec67 image path: original=3471cb6c-f421-4cbf-b488-baba59d8ec67/generated_1744982251_1.png, normalized=3471cb6c-f421-4cbf-b488-baba59d8ec67/generated_1744982251_1.png
+2025-04-18 16:17:31,591 - INFO - Task 3471cb6c-f421-4cbf-b488-baba59d8ec67 status: completed, progress: 100
