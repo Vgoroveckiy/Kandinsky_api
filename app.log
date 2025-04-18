@@ -477,3 +477,34 @@
 2025-04-18 16:17:31,106 - INFO - Image saved: path=3471cb6c-f421-4cbf-b488-baba59d8ec67/generated_1744982251_1.png, url=/image/3471cb6c-f421-4cbf-b488-baba59d8ec67/generated_1744982251_1.png
 2025-04-18 16:17:31,582 - INFO - Task 3471cb6c-f421-4cbf-b488-baba59d8ec67 image path: original=3471cb6c-f421-4cbf-b488-baba59d8ec67/generated_1744982251_1.png, normalized=3471cb6c-f421-4cbf-b488-baba59d8ec67/generated_1744982251_1.png
 2025-04-18 16:17:31,591 - INFO - Task 3471cb6c-f421-4cbf-b488-baba59d8ec67 status: completed, progress: 100
+2025-04-18 16:24:32,092 - INFO - Logging initialized
+2025-04-18 16:24:32,158 - INFO - Initializing ConfigManager
+2025-04-18 16:24:32,159 - INFO - Configuration validated successfully
+2025-04-18 16:24:34,238 - INFO - Logging initialized
+2025-04-18 16:24:34,304 - INFO - Initializing ConfigManager
+2025-04-18 16:24:34,305 - INFO - Configuration validated successfully
+2025-04-18 16:25:33,441 - INFO - Logging initialized
+2025-04-18 16:25:33,518 - INFO - Initializing ConfigManager
+2025-04-18 16:25:33,519 - INFO - Configuration validated successfully
+2025-04-18 16:25:35,755 - INFO - Logging initialized
+2025-04-18 16:25:35,827 - INFO - Initializing ConfigManager
+2025-04-18 16:25:35,828 - INFO - Configuration validated successfully
+2025-04-18 16:26:38,749 - INFO - Initializing ConfigManager
+2025-04-18 16:26:38,752 - INFO - Configuration validated successfully
+2025-04-18 16:26:38,753 - INFO - FusionBrainAPI initialized with URL: https://api-key.fusionbrain.ai/
+2025-04-18 16:26:38,755 - INFO - Requesting pipeline ID from https://api-key.fusionbrain.ai/key/api/v1/pipelines
+2025-04-18 16:26:39,187 - INFO - Successfully retrieved pipeline ID: a17740da-e8a0-4816-876a-74326c5c4cef
+2025-04-18 16:26:39,188 - INFO - Checking service availability for pipeline a17740da-e8a0-4816-876a-74326c5c4cef
+2025-04-18 16:26:39,599 - INFO - Service availability status: {'status': 'ACTIVE'}
+2025-04-18 16:26:39,599 - INFO - Initiating image generation with prompt: черная кошка на веранде загородного дома. лето. крупный план. фотографическое качество, pipeline: a17740da-e8a0-4816-876a-74326c5c4cef, width: 1024, height: 1024, style: default
+2025-04-18 16:26:39,892 - INFO - Image generation initiated, UUID: 26413509-6921-4489-9da0-931be76029d8
+2025-04-18 16:26:39,893 - INFO - Checking generation status for UUID: 26413509-6921-4489-9da0-931be76029d8
+2025-04-18 16:26:40,243 - INFO - Generation status: INITIAL, waiting...
+2025-04-18 16:26:45,593 - INFO - Generation status: INITIAL, waiting...
+2025-04-18 16:26:56,381 - INFO - Generation status: INITIAL, waiting...
+2025-04-18 16:27:17,446 - INFO - Generation completed, found 1 files for UUID: 26413509-6921-4489-9da0-931be76029d8
+2025-04-18 16:27:17,450 - INFO - Saving image to output\a8a12b56-8d4b-47a3-a4dc-c3c31f526746\generated_1744982837_1.png
+2025-04-18 16:27:17,452 - INFO - Base64 image decoded and saved to output\a8a12b56-8d4b-47a3-a4dc-c3c31f526746\generated_1744982837_1.png
+2025-04-18 16:27:17,453 - INFO - Image saved: path=a8a12b56-8d4b-47a3-a4dc-c3c31f526746/generated_1744982837_1.png, url=/image/a8a12b56-8d4b-47a3-a4dc-c3c31f526746/generated_1744982837_1.png
+2025-04-18 16:27:17,775 - INFO - Task a8a12b56-8d4b-47a3-a4dc-c3c31f526746 image path: original=a8a12b56-8d4b-47a3-a4dc-c3c31f526746/generated_1744982837_1.png, normalized=a8a12b56-8d4b-47a3-a4dc-c3c31f526746/generated_1744982837_1.png
+2025-04-18 16:27:17,777 - INFO - Task a8a12b56-8d4b-47a3-a4dc-c3c31f526746 status: completed, progress: 100
