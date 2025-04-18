@@ -1,0 +1,259 @@
+2025-04-18 14:52:03,911 - INFO - Logging initialized
+2025-04-18 14:52:06,183 - INFO - Logging initialized
+2025-04-18 15:03:56,597 - INFO - Logging initialized
+2025-04-18 15:03:58,813 - INFO - Logging initialized
+2025-04-18 15:07:56,576 - INFO - Logging initialized
+2025-04-18 15:07:56,667 - INFO - Initializing ConfigManager
+2025-04-18 15:07:56,668 - INFO - Configuration validated successfully
+2025-04-18 15:07:56,691 - WARNING -  * Debugger is active!
+2025-04-18 15:07:56,703 - INFO -  * Debugger PIN: 117-900-913
+2025-04-18 15:08:09,051 - INFO - 127.0.0.1 - - [18/Apr/2025 15:08:09] "GET / HTTP/1.1" 200 -
+2025-04-18 15:08:09,117 - INFO - 127.0.0.1 - - [18/Apr/2025 15:08:09] "GET /styles HTTP/1.1" 200 -
+2025-04-18 15:10:36,659 - INFO -  * Detected change in 'd:\\PythonProjects\\Kandinsky_api\\client_con.py', reloading
+2025-04-18 15:10:37,802 - INFO - Logging initialized
+2025-04-18 15:10:37,867 - INFO - Initializing ConfigManager
+2025-04-18 15:10:37,867 - INFO - Configuration validated successfully
+2025-04-18 15:10:37,889 - WARNING -  * Debugger is active!
+2025-04-18 15:10:37,902 - INFO -  * Debugger PIN: 117-900-913
+2025-04-18 15:10:47,472 - INFO - 127.0.0.1 - - [18/Apr/2025 15:10:47] "GET / HTTP/1.1" 200 -
+2025-04-18 15:10:47,532 - INFO - 127.0.0.1 - - [18/Apr/2025 15:10:47] "GET /styles HTTP/1.1" 200 -
+2025-04-18 15:11:22,568 - INFO - Initializing ConfigManager
+2025-04-18 15:11:22,568 - INFO - 127.0.0.1 - - [18/Apr/2025 15:11:22] "POST /generate HTTP/1.1" 200 -
+2025-04-18 15:11:22,569 - INFO - Configuration validated successfully
+2025-04-18 15:11:22,569 - INFO - FusionBrainAPI initialized with URL: https://api-key.fusionbrain.ai/
+2025-04-18 15:11:22,570 - INFO - Requesting pipeline ID from https://api-key.fusionbrain.ai/key/api/v1/pipelines
+2025-04-18 15:11:23,147 - INFO - Successfully retrieved pipeline ID: a17740da-e8a0-4816-876a-74326c5c4cef
+2025-04-18 15:11:23,147 - INFO - Checking service availability for pipeline a17740da-e8a0-4816-876a-74326c5c4cef
+2025-04-18 15:11:23,432 - INFO - Service availability status: {'status': 'ACTIVE'}
+2025-04-18 15:11:23,433 - INFO - Initiating image generation with prompt: Красивый закат на морском побережье, pipeline: a17740da-e8a0-4816-876a-74326c5c4cef, width: 512, height: 512, style: default
+2025-04-18 15:11:23,587 - INFO - Returning task data: {'status': 'generating', 'progress': 50}
+2025-04-18 15:11:23,588 - INFO - 127.0.0.1 - - [18/Apr/2025 15:11:23] "GET /task/f082e9a8-dd7f-4ad0-909e-2b966dc54afb HTTP/1.1" 200 -
+2025-04-18 15:11:23,862 - INFO - Image generation initiated, UUID: 0ada3017-7e3f-4b17-b173-849c67ff9930
+2025-04-18 15:11:23,862 - INFO - Checking generation status for UUID: 0ada3017-7e3f-4b17-b173-849c67ff9930
+2025-04-18 15:11:24,262 - INFO - Generation status: INITIAL, waiting...
+2025-04-18 15:11:24,582 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:11:24,584 - INFO - 127.0.0.1 - - [18/Apr/2025 15:11:24] "GET /task/f082e9a8-dd7f-4ad0-909e-2b966dc54afb HTTP/1.1" 200 -
+2025-04-18 15:11:25,583 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:11:25,584 - INFO - 127.0.0.1 - - [18/Apr/2025 15:11:25] "GET /task/f082e9a8-dd7f-4ad0-909e-2b966dc54afb HTTP/1.1" 200 -
+2025-04-18 15:11:26,588 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:11:26,595 - INFO - 127.0.0.1 - - [18/Apr/2025 15:11:26] "GET /task/f082e9a8-dd7f-4ad0-909e-2b966dc54afb HTTP/1.1" 200 -
+2025-04-18 15:11:27,596 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:11:27,608 - INFO - 127.0.0.1 - - [18/Apr/2025 15:11:27] "GET /task/f082e9a8-dd7f-4ad0-909e-2b966dc54afb HTTP/1.1" 200 -
+2025-04-18 15:11:28,595 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:11:28,602 - INFO - 127.0.0.1 - - [18/Apr/2025 15:11:28] "GET /task/f082e9a8-dd7f-4ad0-909e-2b966dc54afb HTTP/1.1" 200 -
+2025-04-18 15:11:29,593 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:11:29,595 - INFO - 127.0.0.1 - - [18/Apr/2025 15:11:29] "GET /task/f082e9a8-dd7f-4ad0-909e-2b966dc54afb HTTP/1.1" 200 -
+2025-04-18 15:11:29,689 - INFO - Generation status: INITIAL, waiting...
+2025-04-18 15:11:30,588 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:11:30,595 - INFO - 127.0.0.1 - - [18/Apr/2025 15:11:30] "GET /task/f082e9a8-dd7f-4ad0-909e-2b966dc54afb HTTP/1.1" 200 -
+2025-04-18 15:11:31,586 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:11:31,592 - INFO - 127.0.0.1 - - [18/Apr/2025 15:11:31] "GET /task/f082e9a8-dd7f-4ad0-909e-2b966dc54afb HTTP/1.1" 200 -
+2025-04-18 15:11:32,587 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:11:32,593 - INFO - 127.0.0.1 - - [18/Apr/2025 15:11:32] "GET /task/f082e9a8-dd7f-4ad0-909e-2b966dc54afb HTTP/1.1" 200 -
+2025-04-18 15:11:33,588 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:11:33,591 - INFO - 127.0.0.1 - - [18/Apr/2025 15:11:33] "GET /task/f082e9a8-dd7f-4ad0-909e-2b966dc54afb HTTP/1.1" 200 -
+2025-04-18 15:11:34,588 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:11:34,595 - INFO - 127.0.0.1 - - [18/Apr/2025 15:11:34] "GET /task/f082e9a8-dd7f-4ad0-909e-2b966dc54afb HTTP/1.1" 200 -
+2025-04-18 15:11:35,586 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:11:35,587 - INFO - 127.0.0.1 - - [18/Apr/2025 15:11:35] "GET /task/f082e9a8-dd7f-4ad0-909e-2b966dc54afb HTTP/1.1" 200 -
+2025-04-18 15:11:36,581 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:11:36,582 - INFO - 127.0.0.1 - - [18/Apr/2025 15:11:36] "GET /task/f082e9a8-dd7f-4ad0-909e-2b966dc54afb HTTP/1.1" 200 -
+2025-04-18 15:11:37,585 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:11:37,586 - INFO - 127.0.0.1 - - [18/Apr/2025 15:11:37] "GET /task/f082e9a8-dd7f-4ad0-909e-2b966dc54afb HTTP/1.1" 200 -
+2025-04-18 15:11:38,584 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:11:38,586 - INFO - 127.0.0.1 - - [18/Apr/2025 15:11:38] "GET /task/f082e9a8-dd7f-4ad0-909e-2b966dc54afb HTTP/1.1" 200 -
+2025-04-18 15:11:39,590 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:11:39,592 - INFO - 127.0.0.1 - - [18/Apr/2025 15:11:39] "GET /task/f082e9a8-dd7f-4ad0-909e-2b966dc54afb HTTP/1.1" 200 -
+2025-04-18 15:11:39,735 - INFO - Generation completed, found 1 files for UUID: 0ada3017-7e3f-4b17-b173-849c67ff9930
+2025-04-18 15:11:39,738 - INFO - Saving image to output\f082e9a8-dd7f-4ad0-909e-2b966dc54afb\generated_1744978299_1.png
+2025-04-18 15:11:39,741 - INFO - Base64 image decoded and saved to output\f082e9a8-dd7f-4ad0-909e-2b966dc54afb\generated_1744978299_1.png
+2025-04-18 15:11:39,742 - INFO - Image saved: path=f082e9a8-dd7f-4ad0-909e-2b966dc54afb/generated_1744978299_1.png, url=/image/f082e9a8-dd7f-4ad0-909e-2b966dc54afb/generated_1744978299_1.png
+2025-04-18 15:11:40,591 - INFO - Task f082e9a8-dd7f-4ad0-909e-2b966dc54afb image path: original=f082e9a8-dd7f-4ad0-909e-2b966dc54afb\generated_1744978299_1.png, normalized=f082e9a8-dd7f-4ad0-909e-2b966dc54afb/generated_1744978299_1.png
+2025-04-18 15:11:40,594 - INFO - Returning task data: {'status': 'completed', 'progress': 100, 'image_paths': [{'path': 'f082e9a8-dd7f-4ad0-909e-2b966dc54afb/generated_1744978299_1.png', 'url': '/image/f082e9a8-dd7f-4ad0-909e-2b966dc54afb/generated_1744978299_1.png'}]}
+2025-04-18 15:11:40,597 - INFO - 127.0.0.1 - - [18/Apr/2025 15:11:40] "GET /task/f082e9a8-dd7f-4ad0-909e-2b966dc54afb HTTP/1.1" 200 -
+2025-04-18 15:11:40,764 - INFO - 127.0.0.1 - - [18/Apr/2025 15:11:40] "GET /image/f082e9a8-dd7f-4ad0-909e-2b966dc54afb/generated_1744978299_1.png HTTP/1.1" 200 -
+2025-04-18 15:35:24,794 - INFO -  * Detected change in 'd:\\PythonProjects\\Kandinsky_api\\client_con.py', reloading
+2025-04-18 15:35:26,236 - INFO - Logging initialized
+2025-04-18 15:35:26,311 - INFO - Initializing ConfigManager
+2025-04-18 15:35:26,312 - INFO - Configuration validated successfully
+2025-04-18 15:35:26,337 - WARNING -  * Debugger is active!
+2025-04-18 15:35:26,351 - INFO -  * Debugger PIN: 117-900-913
+2025-04-18 15:36:09,108 - INFO - 127.0.0.1 - - [18/Apr/2025 15:36:09] "GET / HTTP/1.1" 200 -
+2025-04-18 15:36:09,171 - INFO - 127.0.0.1 - - [18/Apr/2025 15:36:09] "GET /styles HTTP/1.1" 200 -
+2025-04-18 15:36:47,052 - INFO - Initializing ConfigManager
+2025-04-18 15:36:47,052 - INFO - 127.0.0.1 - - [18/Apr/2025 15:36:47] "POST /generate HTTP/1.1" 200 -
+2025-04-18 15:36:47,053 - INFO - Configuration validated successfully
+2025-04-18 15:36:47,059 - INFO - FusionBrainAPI initialized with URL: https://api-key.fusionbrain.ai/
+2025-04-18 15:36:47,061 - INFO - Requesting pipeline ID from https://api-key.fusionbrain.ai/key/api/v1/pipelines
+2025-04-18 15:36:47,598 - INFO - Successfully retrieved pipeline ID: a17740da-e8a0-4816-876a-74326c5c4cef
+2025-04-18 15:36:47,598 - INFO - Checking service availability for pipeline a17740da-e8a0-4816-876a-74326c5c4cef
+2025-04-18 15:36:47,891 - INFO - Service availability status: {'status': 'ACTIVE'}
+2025-04-18 15:36:47,892 - INFO - Initiating image generation with prompt: Красивый восход солнца на южном побережье., pipeline: a17740da-e8a0-4816-876a-74326c5c4cef, width: 512, height: 512, style: default
+2025-04-18 15:36:48,074 - INFO - Returning task data: {'status': 'generating', 'progress': 50}
+2025-04-18 15:36:48,075 - INFO - 127.0.0.1 - - [18/Apr/2025 15:36:48] "GET /task/580766f3-77fb-4d67-a21e-1d5235d0a4dc HTTP/1.1" 200 -
+2025-04-18 15:36:48,184 - INFO - Image generation initiated, UUID: 2a024af9-fbca-49c8-a289-029daece9528
+2025-04-18 15:36:48,184 - INFO - Checking generation status for UUID: 2a024af9-fbca-49c8-a289-029daece9528
+2025-04-18 15:36:48,471 - INFO - Generation status: INITIAL, waiting...
+2025-04-18 15:36:49,074 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:36:49,075 - INFO - 127.0.0.1 - - [18/Apr/2025 15:36:49] "GET /task/580766f3-77fb-4d67-a21e-1d5235d0a4dc HTTP/1.1" 200 -
+2025-04-18 15:36:50,082 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:36:50,084 - INFO - 127.0.0.1 - - [18/Apr/2025 15:36:50] "GET /task/580766f3-77fb-4d67-a21e-1d5235d0a4dc HTTP/1.1" 200 -
+2025-04-18 15:36:51,068 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:36:51,070 - INFO - 127.0.0.1 - - [18/Apr/2025 15:36:51] "GET /task/580766f3-77fb-4d67-a21e-1d5235d0a4dc HTTP/1.1" 200 -
+2025-04-18 15:36:52,068 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:36:52,070 - INFO - 127.0.0.1 - - [18/Apr/2025 15:36:52] "GET /task/580766f3-77fb-4d67-a21e-1d5235d0a4dc HTTP/1.1" 200 -
+2025-04-18 15:36:53,069 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:36:53,071 - INFO - 127.0.0.1 - - [18/Apr/2025 15:36:53] "GET /task/580766f3-77fb-4d67-a21e-1d5235d0a4dc HTTP/1.1" 200 -
+2025-04-18 15:36:53,785 - INFO - Generation status: INITIAL, waiting...
+2025-04-18 15:36:54,068 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:36:54,070 - INFO - 127.0.0.1 - - [18/Apr/2025 15:36:54] "GET /task/580766f3-77fb-4d67-a21e-1d5235d0a4dc HTTP/1.1" 200 -
+2025-04-18 15:36:55,073 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:36:55,075 - INFO - 127.0.0.1 - - [18/Apr/2025 15:36:55] "GET /task/580766f3-77fb-4d67-a21e-1d5235d0a4dc HTTP/1.1" 200 -
+2025-04-18 15:36:56,067 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:36:56,068 - INFO - 127.0.0.1 - - [18/Apr/2025 15:36:56] "GET /task/580766f3-77fb-4d67-a21e-1d5235d0a4dc HTTP/1.1" 200 -
+2025-04-18 15:36:57,072 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:36:57,074 - INFO - 127.0.0.1 - - [18/Apr/2025 15:36:57] "GET /task/580766f3-77fb-4d67-a21e-1d5235d0a4dc HTTP/1.1" 200 -
+2025-04-18 15:36:58,076 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:36:58,079 - INFO - 127.0.0.1 - - [18/Apr/2025 15:36:58] "GET /task/580766f3-77fb-4d67-a21e-1d5235d0a4dc HTTP/1.1" 200 -
+2025-04-18 15:36:59,071 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:36:59,073 - INFO - 127.0.0.1 - - [18/Apr/2025 15:36:59] "GET /task/580766f3-77fb-4d67-a21e-1d5235d0a4dc HTTP/1.1" 200 -
+2025-04-18 15:37:00,067 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:37:00,071 - INFO - 127.0.0.1 - - [18/Apr/2025 15:37:00] "GET /task/580766f3-77fb-4d67-a21e-1d5235d0a4dc HTTP/1.1" 200 -
+2025-04-18 15:37:01,066 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:37:01,068 - INFO - 127.0.0.1 - - [18/Apr/2025 15:37:01] "GET /task/580766f3-77fb-4d67-a21e-1d5235d0a4dc HTTP/1.1" 200 -
+2025-04-18 15:37:02,066 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:37:02,067 - INFO - 127.0.0.1 - - [18/Apr/2025 15:37:02] "GET /task/580766f3-77fb-4d67-a21e-1d5235d0a4dc HTTP/1.1" 200 -
+2025-04-18 15:37:03,067 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:37:03,069 - INFO - 127.0.0.1 - - [18/Apr/2025 15:37:03] "GET /task/580766f3-77fb-4d67-a21e-1d5235d0a4dc HTTP/1.1" 200 -
+2025-04-18 15:37:04,068 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:37:04,070 - INFO - 127.0.0.1 - - [18/Apr/2025 15:37:04] "GET /task/580766f3-77fb-4d67-a21e-1d5235d0a4dc HTTP/1.1" 200 -
+2025-04-18 15:37:04,097 - INFO - Generation completed, found 1 files for UUID: 2a024af9-fbca-49c8-a289-029daece9528
+2025-04-18 15:37:04,102 - INFO - Saving image to output\580766f3-77fb-4d67-a21e-1d5235d0a4dc\generated_1744979824_1.png
+2025-04-18 15:37:04,105 - INFO - Base64 image decoded and saved to output\580766f3-77fb-4d67-a21e-1d5235d0a4dc\generated_1744979824_1.png
+2025-04-18 15:37:04,105 - INFO - Image saved: path=580766f3-77fb-4d67-a21e-1d5235d0a4dc/generated_1744979824_1.png, url=/image/580766f3-77fb-4d67-a21e-1d5235d0a4dc/generated_1744979824_1.png
+2025-04-18 15:37:05,068 - INFO - Task 580766f3-77fb-4d67-a21e-1d5235d0a4dc image path: original=580766f3-77fb-4d67-a21e-1d5235d0a4dc\generated_1744979824_1.png, normalized=580766f3-77fb-4d67-a21e-1d5235d0a4dc/generated_1744979824_1.png
+2025-04-18 15:37:05,070 - INFO - Returning task data: {'status': 'completed', 'progress': 100, 'image_paths': [{'path': '580766f3-77fb-4d67-a21e-1d5235d0a4dc/generated_1744979824_1.png', 'url': '/image/580766f3-77fb-4d67-a21e-1d5235d0a4dc/generated_1744979824_1.png'}]}
+2025-04-18 15:37:05,072 - INFO - 127.0.0.1 - - [18/Apr/2025 15:37:05] "GET /task/580766f3-77fb-4d67-a21e-1d5235d0a4dc HTTP/1.1" 200 -
+2025-04-18 15:37:05,257 - INFO - 127.0.0.1 - - [18/Apr/2025 15:37:05] "GET /image/580766f3-77fb-4d67-a21e-1d5235d0a4dc/generated_1744979824_1.png HTTP/1.1" 200 -
+2025-04-18 15:37:18,237 - INFO - 127.0.0.1 - - [18/Apr/2025 15:37:18] "GET /download/580766f3-77fb-4d67-a21e-1d5235d0a4dc/generated_1744979824_1.png HTTP/1.1" 200 -
+2025-04-18 15:38:30,268 - INFO -  * Detected change in 'd:\\PythonProjects\\Kandinsky_api\\app.py', reloading
+2025-04-18 15:38:31,697 - INFO - Logging initialized
+2025-04-18 15:38:31,791 - INFO - Initializing ConfigManager
+2025-04-18 15:38:31,792 - INFO - Configuration validated successfully
+2025-04-18 15:38:31,814 - WARNING -  * Debugger is active!
+2025-04-18 15:38:31,829 - INFO -  * Debugger PIN: 117-900-913
+2025-04-18 15:48:35,655 - INFO - Logging initialized
+2025-04-18 15:48:35,722 - INFO - Initializing ConfigManager
+2025-04-18 15:48:35,723 - INFO - Configuration validated successfully
+2025-04-18 15:48:36,833 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.188:5000
+2025-04-18 15:48:36,834 - INFO - [33mPress CTRL+C to quit[0m
+2025-04-18 15:48:36,838 - INFO -  * Restarting with stat
+2025-04-18 15:48:37,888 - INFO - Logging initialized
+2025-04-18 15:48:37,954 - INFO - Initializing ConfigManager
+2025-04-18 15:48:37,954 - INFO - Configuration validated successfully
+2025-04-18 15:48:37,974 - WARNING -  * Debugger is active!
+2025-04-18 15:48:37,986 - INFO -  * Debugger PIN: 117-900-913
+2025-04-18 15:48:54,875 - INFO - 127.0.0.1 - - [18/Apr/2025 15:48:54] "GET / HTTP/1.1" 200 -
+2025-04-18 15:48:54,942 - INFO - 127.0.0.1 - - [18/Apr/2025 15:48:54] "GET /styles HTTP/1.1" 200 -
+2025-04-18 15:49:31,544 - INFO - Initializing ConfigManager
+2025-04-18 15:49:31,545 - INFO - 127.0.0.1 - - [18/Apr/2025 15:49:31] "POST /generate HTTP/1.1" 200 -
+2025-04-18 15:49:31,546 - INFO - Configuration validated successfully
+2025-04-18 15:49:31,550 - INFO - FusionBrainAPI initialized with URL: https://api-key.fusionbrain.ai/
+2025-04-18 15:49:31,551 - INFO - Requesting pipeline ID from https://api-key.fusionbrain.ai/key/api/v1/pipelines
+2025-04-18 15:49:31,906 - INFO - Successfully retrieved pipeline ID: a17740da-e8a0-4816-876a-74326c5c4cef
+2025-04-18 15:49:31,908 - INFO - Checking service availability for pipeline a17740da-e8a0-4816-876a-74326c5c4cef
+2025-04-18 15:49:32,303 - INFO - Service availability status: {'status': 'ACTIVE'}
+2025-04-18 15:49:32,304 - INFO - Initiating image generation with prompt: Красивый восход на морском побережье, pipeline: a17740da-e8a0-4816-876a-74326c5c4cef, width: 1024, height: 1024, style: default
+2025-04-18 15:49:32,562 - INFO - Returning task data: {'status': 'generating', 'progress': 50}
+2025-04-18 15:49:32,563 - INFO - 127.0.0.1 - - [18/Apr/2025 15:49:32] "GET /task/ff6d3710-62dd-4256-a553-3706dd5e45ad HTTP/1.1" 200 -
+2025-04-18 15:49:32,709 - INFO - Image generation initiated, UUID: 522f9751-ccfd-4f6f-8323-549b6bb62ef7
+2025-04-18 15:49:32,710 - INFO - Checking generation status for UUID: 522f9751-ccfd-4f6f-8323-549b6bb62ef7
+2025-04-18 15:49:32,996 - INFO - Generation status: INITIAL, waiting...
+2025-04-18 15:49:33,562 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:49:33,564 - INFO - 127.0.0.1 - - [18/Apr/2025 15:49:33] "GET /task/ff6d3710-62dd-4256-a553-3706dd5e45ad HTTP/1.1" 200 -
+2025-04-18 15:49:34,555 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:49:34,556 - INFO - 127.0.0.1 - - [18/Apr/2025 15:49:34] "GET /task/ff6d3710-62dd-4256-a553-3706dd5e45ad HTTP/1.1" 200 -
+2025-04-18 15:49:35,565 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:49:35,566 - INFO - 127.0.0.1 - - [18/Apr/2025 15:49:35] "GET /task/ff6d3710-62dd-4256-a553-3706dd5e45ad HTTP/1.1" 200 -
+2025-04-18 15:49:36,561 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:49:36,563 - INFO - 127.0.0.1 - - [18/Apr/2025 15:49:36] "GET /task/ff6d3710-62dd-4256-a553-3706dd5e45ad HTTP/1.1" 200 -
+2025-04-18 15:49:37,558 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:49:37,559 - INFO - 127.0.0.1 - - [18/Apr/2025 15:49:37] "GET /task/ff6d3710-62dd-4256-a553-3706dd5e45ad HTTP/1.1" 200 -
+2025-04-18 15:49:38,406 - INFO - Generation status: INITIAL, waiting...
+2025-04-18 15:49:38,556 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:49:38,558 - INFO - 127.0.0.1 - - [18/Apr/2025 15:49:38] "GET /task/ff6d3710-62dd-4256-a553-3706dd5e45ad HTTP/1.1" 200 -
+2025-04-18 15:49:39,553 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:49:39,555 - INFO - 127.0.0.1 - - [18/Apr/2025 15:49:39] "GET /task/ff6d3710-62dd-4256-a553-3706dd5e45ad HTTP/1.1" 200 -
+2025-04-18 15:49:40,554 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:49:40,556 - INFO - 127.0.0.1 - - [18/Apr/2025 15:49:40] "GET /task/ff6d3710-62dd-4256-a553-3706dd5e45ad HTTP/1.1" 200 -
+2025-04-18 15:49:41,555 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:49:41,556 - INFO - 127.0.0.1 - - [18/Apr/2025 15:49:41] "GET /task/ff6d3710-62dd-4256-a553-3706dd5e45ad HTTP/1.1" 200 -
+2025-04-18 15:49:42,563 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:49:42,567 - INFO - 127.0.0.1 - - [18/Apr/2025 15:49:42] "GET /task/ff6d3710-62dd-4256-a553-3706dd5e45ad HTTP/1.1" 200 -
+2025-04-18 15:49:43,579 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:49:43,588 - INFO - 127.0.0.1 - - [18/Apr/2025 15:49:43] "GET /task/ff6d3710-62dd-4256-a553-3706dd5e45ad HTTP/1.1" 200 -
+2025-04-18 15:49:44,565 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:49:44,567 - INFO - 127.0.0.1 - - [18/Apr/2025 15:49:44] "GET /task/ff6d3710-62dd-4256-a553-3706dd5e45ad HTTP/1.1" 200 -
+2025-04-18 15:49:45,571 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:49:45,575 - INFO - 127.0.0.1 - - [18/Apr/2025 15:49:45] "GET /task/ff6d3710-62dd-4256-a553-3706dd5e45ad HTTP/1.1" 200 -
+2025-04-18 15:49:46,580 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:49:46,584 - INFO - 127.0.0.1 - - [18/Apr/2025 15:49:46] "GET /task/ff6d3710-62dd-4256-a553-3706dd5e45ad HTTP/1.1" 200 -
+2025-04-18 15:49:47,565 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:49:47,566 - INFO - 127.0.0.1 - - [18/Apr/2025 15:49:47] "GET /task/ff6d3710-62dd-4256-a553-3706dd5e45ad HTTP/1.1" 200 -
+2025-04-18 15:49:48,560 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:49:48,567 - INFO - 127.0.0.1 - - [18/Apr/2025 15:49:48] "GET /task/ff6d3710-62dd-4256-a553-3706dd5e45ad HTTP/1.1" 200 -
+2025-04-18 15:49:49,030 - INFO - Generation status: INITIAL, waiting...
+2025-04-18 15:49:49,558 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:49:49,569 - INFO - 127.0.0.1 - - [18/Apr/2025 15:49:49] "GET /task/ff6d3710-62dd-4256-a553-3706dd5e45ad HTTP/1.1" 200 -
+2025-04-18 15:49:50,557 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:49:50,558 - INFO - 127.0.0.1 - - [18/Apr/2025 15:49:50] "GET /task/ff6d3710-62dd-4256-a553-3706dd5e45ad HTTP/1.1" 200 -
+2025-04-18 15:49:51,558 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:49:51,560 - INFO - 127.0.0.1 - - [18/Apr/2025 15:49:51] "GET /task/ff6d3710-62dd-4256-a553-3706dd5e45ad HTTP/1.1" 200 -
+2025-04-18 15:49:52,553 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:49:52,554 - INFO - 127.0.0.1 - - [18/Apr/2025 15:49:52] "GET /task/ff6d3710-62dd-4256-a553-3706dd5e45ad HTTP/1.1" 200 -
+2025-04-18 15:49:53,556 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:49:53,557 - INFO - 127.0.0.1 - - [18/Apr/2025 15:49:53] "GET /task/ff6d3710-62dd-4256-a553-3706dd5e45ad HTTP/1.1" 200 -
+2025-04-18 15:49:54,555 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:49:54,556 - INFO - 127.0.0.1 - - [18/Apr/2025 15:49:54] "GET /task/ff6d3710-62dd-4256-a553-3706dd5e45ad HTTP/1.1" 200 -
+2025-04-18 15:49:55,560 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:49:55,561 - INFO - 127.0.0.1 - - [18/Apr/2025 15:49:55] "GET /task/ff6d3710-62dd-4256-a553-3706dd5e45ad HTTP/1.1" 200 -
+2025-04-18 15:49:56,559 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:49:56,561 - INFO - 127.0.0.1 - - [18/Apr/2025 15:49:56] "GET /task/ff6d3710-62dd-4256-a553-3706dd5e45ad HTTP/1.1" 200 -
+2025-04-18 15:49:57,564 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:49:57,567 - INFO - 127.0.0.1 - - [18/Apr/2025 15:49:57] "GET /task/ff6d3710-62dd-4256-a553-3706dd5e45ad HTTP/1.1" 200 -
+2025-04-18 15:49:58,559 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:49:58,561 - INFO - 127.0.0.1 - - [18/Apr/2025 15:49:58] "GET /task/ff6d3710-62dd-4256-a553-3706dd5e45ad HTTP/1.1" 200 -
+2025-04-18 15:49:59,565 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:49:59,567 - INFO - 127.0.0.1 - - [18/Apr/2025 15:49:59] "GET /task/ff6d3710-62dd-4256-a553-3706dd5e45ad HTTP/1.1" 200 -
+2025-04-18 15:50:00,565 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:50:00,565 - INFO - 127.0.0.1 - - [18/Apr/2025 15:50:00] "GET /task/ff6d3710-62dd-4256-a553-3706dd5e45ad HTTP/1.1" 200 -
+2025-04-18 15:50:01,562 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:50:01,565 - INFO - 127.0.0.1 - - [18/Apr/2025 15:50:01] "GET /task/ff6d3710-62dd-4256-a553-3706dd5e45ad HTTP/1.1" 200 -
+2025-04-18 15:50:02,557 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:50:02,558 - INFO - 127.0.0.1 - - [18/Apr/2025 15:50:02] "GET /task/ff6d3710-62dd-4256-a553-3706dd5e45ad HTTP/1.1" 200 -
+2025-04-18 15:50:03,558 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:50:03,560 - INFO - 127.0.0.1 - - [18/Apr/2025 15:50:03] "GET /task/ff6d3710-62dd-4256-a553-3706dd5e45ad HTTP/1.1" 200 -
+2025-04-18 15:50:04,555 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:50:04,556 - INFO - 127.0.0.1 - - [18/Apr/2025 15:50:04] "GET /task/ff6d3710-62dd-4256-a553-3706dd5e45ad HTTP/1.1" 200 -
+2025-04-18 15:50:05,556 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:50:05,557 - INFO - 127.0.0.1 - - [18/Apr/2025 15:50:05] "GET /task/ff6d3710-62dd-4256-a553-3706dd5e45ad HTTP/1.1" 200 -
+2025-04-18 15:50:06,557 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:50:06,557 - INFO - 127.0.0.1 - - [18/Apr/2025 15:50:06] "GET /task/ff6d3710-62dd-4256-a553-3706dd5e45ad HTTP/1.1" 200 -
+2025-04-18 15:50:07,554 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:50:07,556 - INFO - 127.0.0.1 - - [18/Apr/2025 15:50:07] "GET /task/ff6d3710-62dd-4256-a553-3706dd5e45ad HTTP/1.1" 200 -
+2025-04-18 15:50:08,559 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:50:08,560 - INFO - 127.0.0.1 - - [18/Apr/2025 15:50:08] "GET /task/ff6d3710-62dd-4256-a553-3706dd5e45ad HTTP/1.1" 200 -
+2025-04-18 15:50:09,554 - INFO - Returning task data: {'status': 'checking_generation', 'progress': 70}
+2025-04-18 15:50:09,559 - INFO - 127.0.0.1 - - [18/Apr/2025 15:50:09] "GET /task/ff6d3710-62dd-4256-a553-3706dd5e45ad HTTP/1.1" 200 -
+2025-04-18 15:50:09,745 - INFO - Generation completed, found 1 files for UUID: 522f9751-ccfd-4f6f-8323-549b6bb62ef7
+2025-04-18 15:50:09,745 - INFO - Saving image to output\ff6d3710-62dd-4256-a553-3706dd5e45ad\generated_1744980609_1.png
+2025-04-18 15:50:09,747 - INFO - Base64 image decoded and saved to output\ff6d3710-62dd-4256-a553-3706dd5e45ad\generated_1744980609_1.png
+2025-04-18 15:50:09,747 - INFO - Image saved: path=ff6d3710-62dd-4256-a553-3706dd5e45ad/generated_1744980609_1.png, url=/image/ff6d3710-62dd-4256-a553-3706dd5e45ad/generated_1744980609_1.png
+2025-04-18 15:50:10,563 - INFO - Task ff6d3710-62dd-4256-a553-3706dd5e45ad image path: original=ff6d3710-62dd-4256-a553-3706dd5e45ad/generated_1744980609_1.png, normalized=ff6d3710-62dd-4256-a553-3706dd5e45ad/generated_1744980609_1.png
+2025-04-18 15:50:10,565 - INFO - Returning task data: {'status': 'completed', 'progress': 100, 'image_paths': [{'path': 'ff6d3710-62dd-4256-a553-3706dd5e45ad/generated_1744980609_1.png', 'url': '/image/ff6d3710-62dd-4256-a553-3706dd5e45ad/generated_1744980609_1.png'}]}
+2025-04-18 15:50:10,566 - INFO - 127.0.0.1 - - [18/Apr/2025 15:50:10] "GET /task/ff6d3710-62dd-4256-a553-3706dd5e45ad HTTP/1.1" 200 -
+2025-04-18 15:50:10,871 - INFO - 127.0.0.1 - - [18/Apr/2025 15:50:10] "GET /image/ff6d3710-62dd-4256-a553-3706dd5e45ad/generated_1744980609_1.png HTTP/1.1" 200 -
+2025-04-18 15:50:18,462 - INFO - 127.0.0.1 - - [18/Apr/2025 15:50:18] "GET /download/ff6d3710-62dd-4256-a553-3706dd5e45ad/generated_1744980609_1.png HTTP/1.1" 200 -

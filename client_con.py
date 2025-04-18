@@ -12,9 +12,11 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-logging.basicConfig(
-    level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
-)
+logger = logging.getLogger(__name__)
+
+# logging.basicConfig(
+#     level=logger.info, format="%(asctime)s - %(levelname)s - %(message)s"
+# )
 
 
 class ConfigManager:
@@ -22,7 +24,7 @@ class ConfigManager:
 
     def __init__(self):
         """Инициализирует конфигурацию, загружая переменные окружения."""
-        logging.info("Initializing ConfigManager")
+        logger.info("Initializing ConfigManager")
         self.api_key = os.getenv("FUSIONBRAIN_API_KEY")
         self.secret_key = os.getenv("FUSIONBRAIN_SECRET_KEY")
         self.prompt = os.getenv(
@@ -42,11 +44,11 @@ class ConfigManager:
             ValueError: Если отсутствует api_key или secret_key.
         """
         if not self.api_key or not self.secret_key:
-            logging.error("API key or Secret key is missing in environment variables")
+            logger.error("API key or Secret key is missing in environment variables")
             raise ValueError(
                 "API key or Secret key is missing in environment variables."
             )
-        logging.info("Configuration validated successfully")
+        logger.info("Configuration validated successfully")
 
 
 class ImageHandler:
@@ -66,7 +68,7 @@ class ImageHandler:
             Exception: Для других ошибок, включая проблемы с декодированием base64.
         """
         try:
-            logging.info("Saving image to %s", save_path)
+            logger.info("Saving image to %s", save_path)
             if isinstance(image_data, str):
                 parsed_url = urlparse(image_data)
                 if parsed_url.scheme in ("http", "https"):
@@ -74,22 +76,22 @@ class ImageHandler:
                     response.raise_for_status()
                     with open(save_path, "wb") as file:
                         file.write(response.content)
-                    logging.info("Image downloaded and saved to %s", save_path)
+                    logger.info("Image downloaded and saved to %s", save_path)
                 else:
                     if image_data.startswith("data:image"):
                         image_data = image_data.split(",")[1]
                     image_bytes = base64.b64decode(image_data)
                     with open(save_path, "wb") as file:
                         file.write(image_bytes)
-                    logging.info("Base64 image decoded and saved to %s", save_path)
+                    logger.info("Base64 image decoded and saved to %s", save_path)
             else:
-                logging.error("Unsupported image data format: %s", type(image_data))
+                logger.error("Unsupported image data format: %s", type(image_data))
                 raise ValueError("Unsupported image data format")
         except requests.exceptions.RequestException as e:
-            logging.error("Failed to download image from URL %s: %s", image_data, e)
+            logger.error("Failed to download image from URL %s: %s", image_data, e)
             raise
         except Exception as e:
-            logging.error("Error saving image to %s: %s", save_path, e)
+            logger.error("Error saving image to %s: %s", save_path, e)
             raise
 
 
@@ -109,7 +111,7 @@ class FusionBrainAPI:
             "X-Key": f"Key {api_key}",
             "X-Secret": f"Secret {secret_key}",
         }
-        logging.info("FusionBrainAPI initialized with URL: %s", url)
+        logger.info("FusionBrainAPI initialized with URL: %s", url)
 
     def get_pipeline(self) -> str:
         """Получает идентификатор pipeline из API.
@@ -123,7 +125,7 @@ class FusionBrainAPI:
             Exception: Для непредвиденных ошибок.
         """
         try:
-            logging.info("Requesting pipeline ID from %skey/api/v1/pipelines", self.URL)
+            logger.info("Requesting pipeline ID from %skey/api/v1/pipelines", self.URL)
             response = requests.get(
                 self.URL + "key/api/v1/pipelines", headers=self.AUTH_HEADERS
             )
@@ -132,16 +134,16 @@ class FusionBrainAPI:
             if not isinstance(data, list) or not data:
                 raise ValueError(f"Unexpected pipeline response: {data}")
             pipeline_id = data[0]["id"]
-            logging.info("Successfully retrieved pipeline ID: %s", pipeline_id)
+            logger.info("Successfully retrieved pipeline ID: %s", pipeline_id)
             return pipeline_id
         except requests.exceptions.RequestException as e:
-            logging.error("Network error in get_pipeline: %s", e)
+            logger.error("Network error in get_pipeline: %s", e)
             raise
         except ValueError as e:
-            logging.error("Validation error in get_pipeline: %s", e)
+            logger.error("Validation error in get_pipeline: %s", e)
             raise
         except Exception as e:
-            logging.error("Unexpected error in get_pipeline: %s", e)
+            logger.error("Unexpected error in get_pipeline: %s", e)
             raise
 
     def check_availability(self, pipeline_id: str) -> dict:
@@ -158,20 +160,20 @@ class FusionBrainAPI:
             Exception: Для непредвиденных ошибок.
         """
         try:
-            logging.info("Checking service availability for pipeline %s", pipeline_id)
+            logger.info("Checking service availability for pipeline %s", pipeline_id)
             response = requests.get(
                 f"{self.URL}key/api/v1/pipeline/{pipeline_id}/availability",
                 headers=self.AUTH_HEADERS,
             )
             response.raise_for_status()
             data = response.json()
-            logging.info("Service availability status: %s", data)
+            logger.info("Service availability status: %s", data)
             return data
         except requests.exceptions.RequestException as e:
-            logging.error("Network error in check_availability: %s", e)
+            logger.error("Network error in check_availability: %s", e)
             raise
         except Exception as e:
-            logging.error("Unexpected error in check_availability: %s", e)
+            logger.error("Unexpected error in check_availability: %s", e)
             raise
 
     def generate(
@@ -223,7 +225,7 @@ class FusionBrainAPI:
         }
 
         try:
-            logging.info(
+            logger.info(
                 "Initiating image generation with prompt: %s, pipeline: %s, width: %d, height: %d, style: %s",
                 prompt,
                 pipeline,
@@ -240,20 +242,20 @@ class FusionBrainAPI:
 
             data = response.json()
             if "uuid" not in data:
-                logging.error("Unexpected generate response: %s", data)
+                logger.error("Unexpected generate response: %s", data)
                 raise ValueError(f"Unexpected generate response: {data}")
 
             uuid = data["uuid"]
-            logging.info("Image generation initiated, UUID: %s", uuid)
+            logger.info("Image generation initiated, UUID: %s", uuid)
             return uuid
         except requests.exceptions.RequestException as e:
-            logging.error("Network error in generate: %s", e)
+            logger.error("Network error in generate: %s", e)
             raise
         except ValueError as e:
-            logging.error("Validation error in generate: %s", e)
+            logger.error("Validation error in generate: %s", e)
             raise
         except Exception as e:
-            logging.error("Unexpected error in generate: %s", e)
+            logger.error("Unexpected error in generate: %s", e)
             raise
 
     def check_generation(
@@ -282,7 +284,7 @@ class FusionBrainAPI:
         try:
             attempt = 0
             delay = initial_delay
-            logging.info("Checking generation status for UUID: %s", request_id)
+            logger.info("Checking generation status for UUID: %s", request_id)
             while attempt < max_attempts:
                 response = requests.get(
                     self.URL + "key/api/v1/pipeline/status/" + request_id,
@@ -303,7 +305,7 @@ class FusionBrainAPI:
                             request_id,
                         )
                     else:
-                        logging.info(
+                        logger.info(
                             "Generation completed, found %d files for UUID: %s",
                             len(files),
                             request_id,
@@ -311,10 +313,10 @@ class FusionBrainAPI:
                     return files
                 elif status == "FAIL":
                     error_desc = data.get("errorDescription", "Unknown error")
-                    logging.error("Generation failed: %s", error_desc)
+                    logger.error("Generation failed: %s", error_desc)
                     raise Exception(f"Generation failed: {error_desc}")
                 elif status in ["PROCESSING", "INITIAL"]:
-                    logging.info("Generation status: %s, waiting...", status)
+                    logger.info("Generation status: %s, waiting...", status)
                 else:
                     logging.warning("Unknown status: %s", status)
 
@@ -328,17 +330,15 @@ class FusionBrainAPI:
                 sleep(delay)
                 delay = min(max_delay, delay * 2 + uniform(-0.5, 0.5))
 
-            logging.error(
-                "Generation did not complete in time for UUID: %s", request_id
-            )
+            logger.error("Generation did not complete in time for UUID: %s", request_id)
             raise TimeoutError("Generation did not complete in time.")
         except requests.exceptions.RequestException as e:
-            logging.error(
+            logger.error(
                 "Network error in check_generation for UUID %s: %s", request_id, e
             )
             raise
         except Exception as e:
-            logging.error(
+            logger.error(
                 "Unexpected error in check_generation for UUID %s: %s", request_id, e
             )
             raise
@@ -387,7 +387,7 @@ if __name__ == "__main__":
         else:
             # Создаем папку output, если она не существует
             os.makedirs("output", exist_ok=True)
-            logging.info("Created output directory")
+            logger.info("Created output directory")
 
             # Сохранение изображений
             image_handler = ImageHandler()
@@ -396,5 +396,5 @@ if __name__ == "__main__":
                 image_handler.save_image(file_data, save_path)
                 print(f"Image saved to {save_path}")
     except Exception as e:
-        logging.error("An error occurred: %s", e)
+        logger.error("An error occurred: %s", e)
         print(f"An error occurred: {e}")

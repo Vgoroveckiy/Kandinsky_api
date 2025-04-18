@@ -6,21 +6,49 @@ import os
 import time
 import uuid
 from datetime import datetime
+from logging.handlers import RotatingFileHandler
 from threading import Thread
 
 from flask import Flask, jsonify, render_template, request, send_from_directory, session
-from flask_session import Session
 from werkzeug.utils import secure_filename
 
 # Импортируем классы из существующего client_con.py
 from client_con import ConfigManager, FusionBrainAPI, ImageHandler
+from flask_session import Session
 
-# Настройка логирования
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s - %(levelname)s - %(message)s",
-    handlers=[logging.FileHandler("app.log"), logging.StreamHandler()],
+# Настройка корневого логгера
+# Настройка корневого логгера
+logging.getLogger("").setLevel(logging.INFO)
+
+# Очищаем существующие обработчики, чтобы избежать дублирования
+logging.getLogger("").handlers.clear()
+
+# Обработчик для файла с ротацией
+log_file = "app.log"
+max_log_size = 5 * 1024 * 1024  # 5 МБ в байтах
+backup_count = 5  # Максимум 5 резервных файлов
+file_handler = RotatingFileHandler(
+    log_file, maxBytes=max_log_size, backupCount=backup_count, encoding="utf-8"
 )
+file_handler.setLevel(logging.INFO)
+file_handler.setFormatter(
+    logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
+)
+logging.getLogger("").addHandler(file_handler)
+
+# Обработчик для консоли
+console_handler = logging.StreamHandler()
+console_handler.setLevel(logging.INFO)
+console_handler.setFormatter(
+    logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
+)
+logging.getLogger("").addHandler(console_handler)
+
+# Логгер для текущего модуля
+logger = logging.getLogger(__name__)
+
+# Тестовое сообщение для проверки
+logger.info("Logging initialized")
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = os.getenv("SECRET_KEY", "fusionbrain-flask-app-secret")
@@ -120,9 +148,13 @@ def generate_image_task(task_id, prompt, width, height, style, negative_prompt):
             filename = f"generated_{int(time.time())}_{i + 1}.png"
             save_path = os.path.join(task_folder, filename)
             image_handler.save_image(file_data, save_path)
+            image_path = f"{task_id}/{filename}"
+            image_url = f"/image/{task_id}/{filename}"
+            logger.info(f"Image saved: path={image_path}, url={image_url}")
             image_paths.append(
                 {
-                    "path": os.path.join(task_id, filename),
+                    "path": image_path,
+                    # "path": os.path.join(task_id, filename),
                     "url": f"/image/{task_id}/{filename}",
                 }
             )
@@ -135,7 +167,7 @@ def generate_image_task(task_id, prompt, width, height, style, negative_prompt):
     except Exception as e:
         tasks[task_id]["status"] = "error"
         tasks[task_id]["message"] = str(e)
-        logging.error(f"Error in task {task_id}: {e}")
+        logger.error(f"Error in task {task_id}: {e}")
 
 
 @app.route("/")
@@ -183,7 +215,7 @@ def generate():
         return jsonify({"success": True, "task_id": task_id})
 
     except Exception as e:
-        logging.error(f"Error starting generation task: {e}")
+        logger.error(f"Error starting generation task: {e}")
         return jsonify({"success": False, "error": str(e)}), 500
 
 
@@ -193,7 +225,16 @@ def task_status(task_id):
     if task_id not in tasks:
         return jsonify({"success": False, "error": "Task not found"}), 404
 
-    return jsonify({"success": True, "task": tasks[task_id]})
+    task_data = tasks[task_id]
+    if "image_paths" in task_data:
+        for img in task_data["image_paths"]:
+            original_path = img["path"]
+            img["path"] = img["path"].replace("\\", "/")
+            logger.info(
+                f"Task {task_id} image path: original={original_path}, normalized={img['path']}"
+            )
+    logger.info(f"Returning task data: {task_data}")
+    return jsonify({"success": True, "task": task_data})
 
 
 @app.route("/image/<task_id>/<filename>")
@@ -236,6 +277,6 @@ if __name__ == "__main__":
         os.makedirs(app.config["UPLOAD_FOLDER"], exist_ok=True)
         app.run(host="0.0.0.0", port=5000, debug=True)
     except ValueError as e:
-        logging.error(f"Configuration error: {e}")
+        logger.error(f"Configuration error: {e}")
         print(f"Error: {e}")
         print("Please check your API credentials in .env file")

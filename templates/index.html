@@ -451,13 +451,31 @@
             
             // Функция для скачивания текущего изображения
             function downloadImage() {
-                if (!currentImagePath) return;
-                
-                const imagePathParts = currentImagePath.split('/');
+                if (!currentImagePath) {
+                    console.error("currentImagePath is undefined or empty");
+                    showToast("Ошибка: путь к изображению не задан", "danger");
+                    return;
+                }
+            
+                console.log("currentImagePath:", currentImagePath); // Отладочный вывод
+            
+                // Убедимся, что путь содержит только taskId и filename
+                const imagePathParts = currentImagePath.split('/').filter(part => part);
+                console.log("imagePathParts:", imagePathParts); // Отладочный вывод
+            
+                if (imagePathParts.length !== 2) {
+                    console.error("Invalid currentImagePath format:", currentImagePath);
+                    showToast("Ошибка: неверный формат пути к изображению", "danger");
+                    return;
+                }
+            
                 const taskId = imagePathParts[0];
                 const filename = imagePathParts[1];
-                
-                window.location.href = `/download/${taskId}/${filename}`;
+            
+                const downloadUrl = `/download/${taskId}/${filename}`;
+                console.log("Download URL:", downloadUrl); // Отладочный вывод
+            
+                window.location.href = downloadUrl;
             }
             
             // Функция для скачивания изображения из модального окна
