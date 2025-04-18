@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FusionBrain Image Generator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding-top: 20px;
+        }
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .card-header {
+            background-color: #6c757d;
+            color: white;
+            border-radius: 10px 10px 0 0 !important;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+        .progress {
+            height: 25px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            border-radius: 15px;
+        }
+        .preview-container {
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .preview-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        .status-message {
+            font-size: 0.9rem;
+            font-style: italic;
+            margin-top: 5px;
+        }
+        /* Animation for loading */
+        @keyframes pulse {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; }
+            100% { opacity: 0.6; }
+        }
+        .loading-animation {
+            animation: pulse 1.5s infinite;
+        }
+        /* Image gallery */
+        .image-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .image-thumbnail {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            cursor: pointer;
+            border: 2px solid transparent;
+            border-radius: 5px;
+            transition: all 0.2s;
+        }
+        .image-thumbnail:hover, .image-thumbnail.active {
+            border-color: #007bff;
+            transform: scale(1.05);
+        }
+        /* Custom toggle switch for dark mode */
+        .theme-switch {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+        }
+        
+        /* Toast notifications */
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1060;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-12">
+                <h1 class="text-center">FusionBrain Image Generator</h1>
+                <p class="text-center text-muted">Генерация изображений с помощью нейросети</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Форма параметров -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">Параметры генерации</h5>
+                    </div>
+                    <div class="card-body">
+                        <form id="generationForm">
+                            <div class="mb-3">
+                                <label for="prompt" class="form-label">Текстовый запрос</label>
+                                <textarea class="form-control" id="prompt" name="prompt" rows="3" required 
+                                    placeholder="Опишите желаемое изображение, например: Красивый закат на морском побережье"></textarea>
+                            </div>
+                            
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="width" class="form-label">Ширина (px)</label>
+                                    <select class="form-select" id="width" name="width">
+                                        <option value="512">512 (SD 1.5)</option>
+                                        <option value="768">768</option>
+                                        <option value="1024" selected>1024 (рекомендуется)</option>
+                                        <option value="1280">1280</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="height" class="form-label">Высота (px)</label>
+                                    <select class="form-select" id="height" name="height">
+                                        <option value="512">512 (SD 1.5)</option>
+                                        <option value="768">768</option>
+                                        <option value="1024" selected>1024 (рекомендуется)</option>
+                                        <option value="1280">1280</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="style" class="form-label">Стиль изображения</label>
+                                <select class="form-select" id="style" name="style">
+                                    <option value="">По умолчанию</option>
+                                    <!-- Стили будут загружены из API -->
+                                </select>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="negative_prompt" class="form-label">Негативный промпт <small class="text-muted">(не обязательно)</small></label>
+                                <textarea class="form-control" id="negative_prompt" name="negative_prompt" rows="2" 
+                                    placeholder="Укажите, что НЕ должно быть на изображении"></textarea>
+                            </div>
+                            
+                            <div class="d-grid gap-2">
+                                <button type="submit" id="generateBtn" class="btn btn-primary">
+                                    <i class="fas fa-magic me-2"></i>Сгенерировать
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- Статус генерации -->
+                <div class="card" id="statusCard" style="display: none;">
+                    <div class="card-header">
+                        <h5 class="mb-0">Статус генерации</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="progress mb-3">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" 
+                                 id="progressBar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+                        </div>
+                        <p id="statusText" class="status-message">Подготовка к генерации...</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Предпросмотр изображения -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">Предпросмотр</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="preview-container" id="previewContainer">
+                            <div class="text-center text-muted" id="previewPlaceholder">
+                                <i class="fas fa-image fa-4x mb-3"></i>
+                                <p>Сгенерированное изображение будет отображено здесь</p>
+                            </div>
+                            <img id="previewImage" src="" style="display: none;" alt="Сгенерированное изображение">
+                        </div>
+                        
+                        <!-- Галерея изображений (если будет несколько) -->
+                        <div class="image-gallery" id="imageGallery" style="display: none;"></div>
+                        
+                        <!-- Кнопки действий с изображением -->
+                        <div class="d-flex justify-content-center mt-3" id="imageActions" style="display: none;">
+                            <button id="downloadBtn" class="btn btn-success me-2">
+                                <i class="fas fa-download me-2"></i>Скачать
+                            </button>
+                            <button id="shareBtn" class="btn btn-info me-2">
+                                <i class="fas fa-share-alt me-2"></i>Поделиться
+                            </button>
+                            <button id="newGenerationBtn" class="btn btn-secondary">
+                                <i class="fas fa-redo me-2"></i>Новая генерация
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Toast контейнер для уведомлений -->
+    <div class="toast-container"></div>
+    
+    <!-- Модальное окно для просмотра изображения -->
+    <div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Просмотр изображения</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img id="modalImage" src="" class="img-fluid" alt="Сгенерированное изображение в полном размере">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                    <button type="button" id="modalDownloadBtn" class="btn btn-primary">Скачать</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Элементы DOM
+            const generationForm = document.getElementById('generationForm');
+            const generateBtn = document.getElementById('generateBtn');
+            const statusCard = document.getElementById('statusCard');
+            const progressBar = document.getElementById('progressBar');
+            const statusText = document.getElementById('statusText');
+            const previewPlaceholder = document.getElementById('previewPlaceholder');
+            const previewImage = document.getElementById('previewImage');
+            const imageGallery = document.getElementById('imageGallery');
+            const imageActions = document.getElementById('imageActions');
+            const downloadBtn = document.getElementById('downloadBtn');
+            const shareBtn = document.getElementById('shareBtn');
+            const newGenerationBtn = document.getElementById('newGenerationBtn');
+            const styleSelect = document.getElementById('style');
+            
+            // Модальное окно
+            const imageModal = new bootstrap.Modal(document.getElementById('imageModal'));
+            const modalImage = document.getElementById('modalImage');
+            const modalDownloadBtn = document.getElementById('modalDownloadBtn');
+            
+            // Текущая задача
+            let currentTaskId = null;
+            let currentImageUrls = [];
+            let currentImagePath = null;
+            let statusCheckInterval = null;
+
+            // Загрузка стилей
+            fetchStyles();
+            
+            // Обработчики событий
+            generationForm.addEventListener('submit', startGeneration);
+            downloadBtn.addEventListener('click', downloadImage);
+            shareBtn.addEventListener('click', shareImage);
+            newGenerationBtn.addEventListener('click', resetUI);
+            modalDownloadBtn.addEventListener('click', downloadCurrentImage);
+            
+            // Функция для загрузки стилей
+            function fetchStyles() {
+                fetch('/styles')
+                    .then(response => response.json())
+                    .then(styles => {
+                        styleSelect.innerHTML = '<option value="">По умолчанию</option>';
+                        styles.forEach(style => {
+                            const option = document.createElement('option');
+                            option.value = style.id;
+                            option.textContent = style.name;
+                            styleSelect.appendChild(option);
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Ошибка загрузки стилей:', error);
+                        showToast('Ошибка загрузки стилей', 'danger');
+                    });
+            }
+            
+            // Функция для начала генерации
+            function startGeneration(event) {
+                event.preventDefault();
+                
+                // Сбрасываем предыдущие результаты
+                resetResults();
+                
+                // Показываем статус и прогресс
+                statusCard.style.display = 'block';
+                updateProgress(10, 'Подготовка к генерации...');
+                
+                // Блокируем кнопку генерации
+                generateBtn.disabled = true;
+                generateBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Генерация...';
+                
+                // Собираем данные формы
+                const formData = new FormData(generationForm);
+                
+                // Отправляем запрос на сервер
+                fetch('/generate', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        currentTaskId = data.task_id;
+                        // Начинаем проверять статус задачи
+                        statusCheckInterval = setInterval(checkTaskStatus, 1000);
+                    } else {
+                        throw new Error(data.error || 'Ошибка при запуске генерации');
+                    }
+                })
+                .catch(error => {
+                    console.error('Ошибка:', error);
+                    updateProgress(0, `Ошибка: ${error.message}`);
+                    showToast(`Ошибка: ${error.message}`, 'danger');
+                    enableGenerateButton();
+                });
+            }
+            
+            // Функция для проверки статуса задачи
+            function checkTaskStatus() {
+                if (!currentTaskId) return;
+                
+                fetch(`/task/${currentTaskId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (!data.success) {
+                            throw new Error(data.error || 'Задача не найдена');
+                        }
+                        
+                        const task = data.task;
+                        
+                        // Обновляем прогресс и статус
+                        updateProgress(task.progress || 0, getStatusMessage(task.status, task.message));
+                        
+                        // Проверяем, завершена ли задача
+                        if (task.status === 'completed') {
+                            clearInterval(statusCheckInterval);
+                            
+                            // Показываем изображение
+                            if (task.image_paths && task.image_paths.length > 0) {
+                                currentImageUrls = task.image_paths.map(img => img.url);
+                                currentImagePath = task.image_paths[0].path;
+                                
+                                // Показываем первое изображение
+                                showImage(currentImageUrls[0]);
+                                
+                                // Если есть несколько изображений, показываем галерею
+                                if (currentImageUrls.length > 1) {
+                                    showGallery(task.image_paths);
+                                }
+                                
+                                // Показываем кнопки действий
+                                imageActions.style.display = 'flex';
+                            }
+                            
+                            enableGenerateButton();
+                            
+                        } else if (['error', 'unavailable', 'no_files'].includes(task.status)) {
+                            clearInterval(statusCheckInterval);
+                            showToast(`Ошибка: ${task.message || 'Произошла ошибка при генерации'}`, 'danger');
+                            enableGenerateButton();
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Ошибка при проверке статуса:', error);
+                        clearInterval(statusCheckInterval);
+                        updateProgress(0, `Ошибка: ${error.message}`);
+                        showToast(`Ошибка: ${error.message}`, 'danger');
+                        enableGenerateButton();
+                    });
+            }
+            
+            // Функция для обновления прогресса
+            function updateProgress(percent, message) {
+                progressBar.style.width = `${percent}%`;
+                progressBar.setAttribute('aria-valuenow', percent);
+                progressBar.textContent = `${percent}%`;
+                
+                if (message) {
+                    statusText.textContent = message;
+                }
+            }
+            
+            // Функция для отображения изображения
+            function showImage(imageUrl) {
+                previewPlaceholder.style.display = 'none';
+                previewImage.src = imageUrl;
+                previewImage.style.display = 'block';
+                
+                // Настраиваем модальное окно
+                modalImage.src = imageUrl;
+                
+                // Добавляем обработчик для открытия модального окна при клике на изображение
+                previewImage.onclick = function() {
+                    imageModal.show();
+                };
+            }
+            
+            // Функция для отображения галереи изображений
+            function showGallery(images) {
+                imageGallery.innerHTML = '';
+                imageGallery.style.display = 'flex';
+                
+                images.forEach((img, index) => {
+                    const thumbnail = document.createElement('img');
+                    thumbnail.src = img.url;
+                    thumbnail.alt = `Изображение ${index + 1}`;
+                    thumbnail.className = 'image-thumbnail' + (index === 0 ? ' active' : '');
+                    thumbnail.dataset.path = img.path;
+                    
+                    thumbnail.addEventListener('click', function() {
+                        // Удаляем активный класс у всех миниатюр
+                        document.querySelectorAll('.image-thumbnail').forEach(thumb => {
+                            thumb.classList.remove('active');
+                        });
+                        
+                        // Добавляем активный класс текущей миниатюре
+                        this.classList.add('active');
+                        
+                        // Обновляем текущее изображение
+                        showImage(img.url);
+                        currentImagePath = img.path;
+                    });
+                    
+                    imageGallery.appendChild(thumbnail);
+                });
+            }
+            
+            // Функция для скачивания текущего изображения
+            function downloadImage() {
+                if (!currentImagePath) return;
+                
+                const imagePathParts = currentImagePath.split('/');
+                const taskId = imagePathParts[0];
+                const filename = imagePathParts[1];
+                
+                window.location.href = `/download/${taskId}/${filename}`;
+            }
+            
+            // Функция для скачивания изображения из модального окна
+            function downloadCurrentImage() {
+                downloadImage();
+                imageModal.hide();
+            }
+            
+            // Функция для шаринга изображения (заглушка)
+            function shareImage() {
+                if (!currentImageUrls || currentImageUrls.length === 0) return;
+                
+                // В реальном приложении здесь был бы код для шаринга
+                showToast('Функция шаринга в разработке', 'info');
+            }
+            
+            // Функция для сброса UI к начальному состоянию
+            function resetUI() {
+                resetResults();
+                generationForm.reset();
+                enableGenerateButton();
+            }
+            
+            // Функция для сброса результатов
+            function resetResults() {
+                previewPlaceholder.style.display = 'block';
+                previewImage.style.display = 'none';
+                imageGallery.style.display = 'none';
+                imageActions.style.display = 'none';
+                imageGallery.innerHTML = '';
+                
+                currentTaskId = null;
+                currentImageUrls = [];
+                currentImagePath = null;
+                
+                if (statusCheckInterval) {
+                    clearInterval(statusCheckInterval);
+                    statusCheckInterval = null;
+                }
+            }
+            
+            // Функция для разблокировки кнопки генерации
+            function enableGenerateButton() {
+                generateBtn.disabled = false;
+                generateBtn.innerHTML = '<i class="fas fa-magic me-2"></i>Сгенерировать';
+            }
+            
+            // Функция для преобразования статуса в сообщение
+            function getStatusMessage(status, message) {
+                const statusMessages = {
+                    'created': 'Задача создана',
+                    'initializing': 'Инициализация генерации...',
+                    'connecting': 'Подключение к API...',
+                    'getting_pipeline': 'Получение информации о генераторе...',
+                    'checking_availability': 'Проверка доступности сервера...',
+                    'generating': 'Генерация изображения, ожидайте...',
+                    'checking_generation': 'Проверка результатов генерации...',
+                    'saving': 'Сохранение результатов...',
+                    'completed': 'Генерация завершена!',
+                    'error': 'Ошибка при генерации',
+                    'unavailable': 'Сервис недоступен',
+                    'no_files': 'Изображения не получены'
+                };
+                
+                return message || statusMessages[status] || `Статус: ${status}`;
+            }
+            
+            // Функция для отображения toast уведомлений
+            function showToast(message, type = 'info') {
+                const toastId = new Date().getTime();
+                const toast = document.createElement('div');
+                toast.className = `toast align-items-center text-white bg-${type} border-0`;
+                toast.setAttribute('id', `toast-${toastId}`);
+                toast.setAttribute('role', 'alert');
+                toast.setAttribute('aria-live', 'assertive');
+                toast.setAttribute('aria-atomic', 'true');
+                
+                toast.innerHTML = `
+                    <div class="d-flex">
+                        <div class="toast-body">
+                            ${message}
+                        </div>
+                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                `;
+                
+                document.querySelector('.toast-container').appendChild(toast);
+                
+                const bsToast = new bootstrap.Toast(toast, {
+                    delay: 5000,
+                    autohide: true
+                });
+                
+                bsToast.show();
+                
+                // Удаляем toast после скрытия
+                toast.addEventListener('hidden.bs.toast', function () {
+                    toast.remove();
+                });
+            }
+        });
+    </script>
+    
+    <!-- Дополнительная информация в подвале -->
+    <footer class="container mt-5 mb-4 pt-4 border-top">
+        <div class="row">
+            <div class="col-12 col-md text-center text-md-start">
+                <small class="d-block mb-3 text-muted">
+                    &copy; 2025 FusionBrain Image Generator
+                </small>
+                <p class="text-muted small">
+                    Демонстрационное приложение для генерации изображений с помощью
+                    нейросети FusionBrain AI. Для работы приложения необходим API-ключ.
+                </p>
+            </div>
+            <div class="col-6 col-md text-center">
+                <h5>Ресурсы</h5>
+                <ul class="list-unstyled">
+                    <li><a class="text-muted" href="#" target="_blank">Документация API</a></li>
+                    <li><a class="text-muted" href="#" target="_blank">Примеры промптов</a></li>
+                    <li><a class="text-muted" href="#" target="_blank">Руководство пользователя</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-md text-center">
+                <h5>Контакты</h5>
+                <ul class="list-unstyled">
+                    <li><a class="text-muted" href="#" target="_blank">GitHub</a></li>
+                    <li><a class="text-muted" href="#" target="_blank">Telegram</a></li>
+                    <li><a class="text-muted" href="#" target="_blank">Email</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

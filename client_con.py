@@ -30,7 +30,10 @@ class ConfigManager:
         )
         self.width = int(os.getenv("FUSIONBRAIN_DEFAULT_WIDTH", 512))
         self.height = int(os.getenv("FUSIONBRAIN_DEFAULT_HEIGHT", 512))
-        self.images = int(os.getenv("FUSIONBRAIN_DEFAULT_IMAGES", 1))
+        self.style = os.getenv("FUSIONBRAIN_DEFAULT_STYLE", None)  # Добавлен стиль
+        self.negative_prompt = os.getenv(
+            "FUSIONBRAIN_DEFAULT_NEGATIVE_PROMPT", None
+        )  # Добавлен негативный промпт
 
     def validate(self) -> None:
         """Проверяет наличие обязательных ключей API.
@@ -141,65 +144,117 @@ class FusionBrainAPI:
             logging.error("Unexpected error in get_pipeline: %s", e)
             raise
 
+    def check_availability(self, pipeline_id: str) -> dict:
+        """Проверяет доступность сервиса.
+
+        Args:
+            pipeline_id (str): Идентификатор pipeline.
+
+        Returns:
+            dict: Информация о доступности сервиса.
+
+        Raises:
+            requests.exceptions.RequestException: Если произошла сетевая ошибка.
+            Exception: Для непредвиденных ошибок.
+        """
+        try:
+            logging.info("Checking service availability for pipeline %s", pipeline_id)
+            response = requests.get(
+                f"{self.URL}key/api/v1/pipeline/{pipeline_id}/availability",
+                headers=self.AUTH_HEADERS,
+            )
+            response.raise_for_status()
+            data = response.json()
+            logging.info("Service availability status: %s", data)
+            return data
+        except requests.exceptions.RequestException as e:
+            logging.error("Network error in check_availability: %s", e)
+            raise
+        except Exception as e:
+            logging.error("Unexpected error in check_availability: %s", e)
+            raise
+
     def generate(
-        self, prompt: str, pipeline: str, images: int, width: int, height: int
+        self,
+        prompt: str,
+        pipeline: str,
+        width: int = 1024,
+        height: int = 1024,
+        style: str = None,
+        negative_prompt: str = None,
     ) -> str:
         """Инициирует генерацию изображения через API.
 
         Args:
             prompt (str): Текстовое описание для генерации изображения.
             pipeline (str): Идентификатор pipeline.
-            images (int): Количество изображений для генерации.
             width (int): Ширина изображения в пикселях.
             height (int): Высота изображения в пикселях.
+            style (str, optional): Стиль изображения.
+            negative_prompt (str, optional): Негативный промпт.
 
         Returns:
             str: UUID запроса генерации.
 
         Raises:
-            Exception: Если запрос завершился с ошибкой HTTP.
+            requests.exceptions.RequestException: Если запрос завершился с ошибкой HTTP.
             ValueError: Если ответ API не содержит UUID.
+            Exception: Для непредвиденных ошибок.
         """
         params = {
             "type": "GENERATE",
-            "numImages": images,
+            "numImages": 1,  # Согласно документации, можно запросить только 1 изображение
             "width": width,
             "height": height,
             "generateParams": {"query": f"{prompt}"},
         }
 
+        # Добавляем стиль, если он указан
+        if style:
+            params["style"] = style
+
+        # Добавляем негативный промпт, если он указан
+        if negative_prompt:
+            params["negativePromptDecoder"] = negative_prompt
+
         data = {
             "pipeline_id": (None, pipeline),
             "params": (None, json.dumps(params), "application/json"),
         }
-        logging.info(
-            "Initiating image generation with prompt: %s, pipeline: %s, images: %d, width: %d, height: %d",
-            prompt,
-            pipeline,
-            images,
-            width,
-            height,
-        )
-        response = requests.post(
-            self.URL + "key/api/v1/pipeline/run", headers=self.AUTH_HEADERS, files=data
-        )
 
-        if response.status_code not in [200, 201]:
-            logging.error(
-                "Failed to generate image. Status code: %d", response.status_code
+        try:
+            logging.info(
+                "Initiating image generation with prompt: %s, pipeline: %s, width: %d, height: %d, style: %s",
+                prompt,
+                pipeline,
+                width,
+                height,
+                style if style else "default",
             )
-            raise Exception(
-                f"Failed to generate image. Status code: {response.status_code}"
+            response = requests.post(
+                self.URL + "key/api/v1/pipeline/run",
+                headers=self.AUTH_HEADERS,
+                files=data,
             )
+            response.raise_for_status()
 
-        data = response.json()
-        if "uuid" not in data:
-            logging.error("Unexpected generate response: %s", data)
-            raise ValueError(f"Unexpected generate response: {data}")
+            data = response.json()
+            if "uuid" not in data:
+                logging.error("Unexpected generate response: %s", data)
+                raise ValueError(f"Unexpected generate response: {data}")
 
-        uuid = data["uuid"]
-        logging.info("Image generation initiated, UUID: %s", uuid)
-        return uuid
+            uuid = data["uuid"]
+            logging.info("Image generation initiated, UUID: %s", uuid)
+            return uuid
+        except requests.exceptions.RequestException as e:
+            logging.error("Network error in generate: %s", e)
+            raise
+        except ValueError as e:
+            logging.error("Validation error in generate: %s", e)
+            raise
+        except Exception as e:
+            logging.error("Unexpected error in generate: %s", e)
+            raise
 
     def check_generation(
         self,
@@ -236,8 +291,12 @@ class FusionBrainAPI:
                 response.raise_for_status()
                 data = response.json()
 
-                if data["status"] == "DONE":
+                status = data.get("status")
+                if status == "DONE":
                     files = data.get("result", {}).get("files", [])
+                    censored = data.get("result", {}).get("censored", False)
+                    if censored:
+                        logging.warning("Content was censored for UUID: %s", request_id)
                     if not files:
                         logging.warning(
                             "No files found in the generation result for UUID: %s",
@@ -250,10 +309,18 @@ class FusionBrainAPI:
                             request_id,
                         )
                     return files
+                elif status == "FAIL":
+                    error_desc = data.get("errorDescription", "Unknown error")
+                    logging.error("Generation failed: %s", error_desc)
+                    raise Exception(f"Generation failed: {error_desc}")
+                elif status in ["PROCESSING", "INITIAL"]:
+                    logging.info("Generation status: %s, waiting...", status)
+                else:
+                    logging.warning("Unknown status: %s", status)
 
                 attempt += 1
                 logging.debug(
-                    "Attempt %d/%d failed, retrying in %.2f seconds",
+                    "Attempt %d/%d, retrying in %.2f seconds",
                     attempt,
                     max_attempts,
                     delay,
@@ -291,9 +358,23 @@ if __name__ == "__main__":
         # Получение pipeline ID
         pipeline_id = api.get_pipeline()
 
+        # Проверка доступности сервиса
+        availability = api.check_availability(pipeline_id)
+        if availability.get("pipeline_status") == "DISABLED_BY_QUEUE":
+            logging.warning(
+                "Service is currently unavailable due to high load. Try again later."
+            )
+            print("Service is currently unavailable due to high load. Try again later.")
+            exit(1)
+
         # Генерация изображения
         uuid = api.generate(
-            config.prompt, pipeline_id, config.images, config.width, config.height
+            config.prompt,
+            pipeline_id,
+            config.width,
+            config.height,
+            style=config.style,
+            negative_prompt=config.negative_prompt,
         )
 
         # Проверка статуса генерации
@@ -313,6 +394,7 @@ if __name__ == "__main__":
             for i, file_data in enumerate(files):
                 save_path = os.path.join("output", f"generated_image_{i + 1}.png")
                 image_handler.save_image(file_data, save_path)
+                print(f"Image saved to {save_path}")
     except Exception as e:
         logging.error("An error occurred: %s", e)
         print(f"An error occurred: {e}")
