@@ -1,0 +1,14 @@
+[Unit]
+Description=Kandinsky API (Generate image) python script
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/styx/PythonScripts/Kandinsky_api
+ExecStart=/home/styx/PythonScripts/Kandinsky_api/.venv/bin/python /home/styx/PythonScripts/Kandinsky_api/app.py
+Restart=always
+User=styx
+Group=styx
+
+[Install]
+WantedBy=multi-user.target
