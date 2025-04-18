@@ -660,3 +660,34 @@
 2025-04-18 16:52:30,992 - INFO - Image saved: path=40086f9a-d4c5-4d2f-8fdd-e0e62ef77f58/generated_1744984350_1.png, url=/image/40086f9a-d4c5-4d2f-8fdd-e0e62ef77f58/generated_1744984350_1.png
 2025-04-18 16:52:31,796 - INFO - Task 40086f9a-d4c5-4d2f-8fdd-e0e62ef77f58 image path: original=40086f9a-d4c5-4d2f-8fdd-e0e62ef77f58/generated_1744984350_1.png, normalized=40086f9a-d4c5-4d2f-8fdd-e0e62ef77f58/generated_1744984350_1.png
 2025-04-18 16:52:31,797 - INFO - Task 40086f9a-d4c5-4d2f-8fdd-e0e62ef77f58 status: completed, progress: 100
+2025-04-18 17:07:36,191 - INFO - Logging initialized
+2025-04-18 17:07:36,262 - INFO - Starting cleanup of D:\PythonProjects\Kandinsky_api\output (age > 24.0 hours)
+2025-04-18 17:07:36,262 - INFO - Started output folder cleanup thread
+2025-04-18 17:07:36,266 - INFO - Initializing ConfigManager
+2025-04-18 17:07:36,267 - INFO - Configuration validated successfully
+2025-04-18 17:07:36,268 - INFO - Cleanup completed: deleted 0 directories
+2025-04-18 17:07:38,446 - INFO - Logging initialized
+2025-04-18 17:07:38,510 - INFO - Starting cleanup of D:\PythonProjects\Kandinsky_api\output (age > 24.0 hours)
+2025-04-18 17:07:38,510 - INFO - Started output folder cleanup thread
+2025-04-18 17:07:38,516 - INFO - Initializing ConfigManager
+2025-04-18 17:07:38,518 - INFO - Configuration validated successfully
+2025-04-18 17:07:38,518 - INFO - Cleanup completed: deleted 0 directories
+2025-04-18 17:08:21,425 - INFO - Logging initialized
+2025-04-18 17:08:21,489 - INFO - Starting cleanup of D:\PythonProjects\Kandinsky_api\output (age > 0.1 hours)
+2025-04-18 17:08:21,489 - INFO - Started output folder cleanup thread
+2025-04-18 17:08:21,494 - INFO - Initializing ConfigManager
+2025-04-18 17:08:21,495 - INFO - Deleted old directory: D:\PythonProjects\Kandinsky_api\output\14c8f1ed-9e60-4f6d-8332-2a31acccefa9 (age: 0.3 hours)
+2025-04-18 17:08:21,496 - INFO - Configuration validated successfully
+2025-04-18 17:08:21,498 - INFO - Deleted old directory: D:\PythonProjects\Kandinsky_api\output\2c4380d8-68ce-4793-a4e4-bc08380c1086 (age: 0.4 hours)
+2025-04-18 17:08:21,501 - INFO - Deleted old directory: D:\PythonProjects\Kandinsky_api\output\34902ad2-35b9-4782-8552-6429e85ea90d (age: 0.5 hours)
+2025-04-18 17:08:21,506 - INFO - Deleted old directory: D:\PythonProjects\Kandinsky_api\output\40086f9a-d4c5-4d2f-8fdd-e0e62ef77f58 (age: 0.3 hours)
+2025-04-18 17:08:21,509 - INFO - Deleted old directory: D:\PythonProjects\Kandinsky_api\output\70192bdf-7f7b-44fa-a47b-252b6dbcd41a (age: 0.6 hours)
+2025-04-18 17:08:21,512 - INFO - Deleted old directory: D:\PythonProjects\Kandinsky_api\output\baedd067-fd10-4701-8d8d-1f7090cbab93 (age: 0.3 hours)
+2025-04-18 17:08:21,515 - INFO - Deleted old directory: D:\PythonProjects\Kandinsky_api\output\d1d2dcdc-1059-48cd-ae07-320123435f4f (age: 0.3 hours)
+2025-04-18 17:08:21,518 - INFO - Cleanup completed: deleted 7 directories
+2025-04-18 17:08:23,687 - INFO - Logging initialized
+2025-04-18 17:08:23,753 - INFO - Starting cleanup of D:\PythonProjects\Kandinsky_api\output (age > 0.1 hours)
+2025-04-18 17:08:23,753 - INFO - Started output folder cleanup thread
+2025-04-18 17:08:23,760 - INFO - Initializing ConfigManager
+2025-04-18 17:08:23,760 - INFO - Cleanup completed: deleted 0 directories
+2025-04-18 17:08:23,761 - INFO - Configuration validated successfully

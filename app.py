@@ -1,6 +1,7 @@
 # app.py
 import logging
 import os
+import shutil
 import time
 import uuid
 from datetime import datetime
@@ -25,6 +26,11 @@ log_backup_count = int(os.getenv("LOG_BACKUP_COUNT", 3))  # По умолчан�
 
 # Преобразуем размер в байты (1 МБ = 1024 * 1024 байт)
 log_max_size = int(log_max_size_mb * 1024 * 1024)
+
+# Получаем параметр очистки output из .env
+output_cleanup_age_hours = float(
+    os.getenv("OUTPUT_CLEANUP_AGE_HOURS", 24)
+)  # По умолчанию 24 часа
 
 # Настройка корневого логгера
 if not logging.getLogger("").handlers:
@@ -53,9 +59,67 @@ werkzeug_logger.propagate = False  # Не передаём сообщения к
 # Логгер для текущего модуля
 logger = logging.getLogger(__name__)
 
-
 # Тестовое сообщение для проверки
 logger.info("Logging initialized")
+
+
+# Функция очистки старых подкаталогов в output
+def cleanup_output_folder():
+    """Удаляет подкаталоги в output, старше OUTPUT_CLEANUP_AGE_HOURS"""
+    output_folder = os.path.abspath(app.config["UPLOAD_FOLDER"])
+    cleanup_age_seconds = output_cleanup_age_hours * 3600  # Конвертируем часы в секунды
+    current_time = time.time()
+
+    logger.info(
+        f"Starting cleanup of {output_folder} (age > {output_cleanup_age_hours} hours)"
+    )
+
+    try:
+        # Проверяем, существует ли каталог
+        if not os.path.exists(output_folder):
+            logger.info(
+                f"Output folder {output_folder} does not exist, skipping cleanup"
+            )
+            return
+
+        # Перебираем подкаталоги
+        deleted_count = 0
+        for subdir in os.listdir(output_folder):
+            subdir_path = os.path.join(output_folder, subdir)
+            # Проверяем, что это каталог
+            if not os.path.isdir(subdir_path):
+                continue
+
+            # Получаем время последней модификации каталога
+            mtime = os.path.getmtime(subdir_path)
+            age_seconds = current_time - mtime
+
+            # Удаляем, если каталог старше заданного возраста
+            if age_seconds > cleanup_age_seconds:
+                try:
+                    shutil.rmtree(
+                        subdir_path
+                    )  # Рекурсивно удаляем каталог и его содержимое
+                    logger.info(
+                        f"Deleted old directory: {subdir_path} (age: {age_seconds/3600:.1f} hours)"
+                    )
+                    deleted_count += 1
+                except Exception as e:
+                    logger.error(f"Failed to delete directory {subdir_path}: {e}")
+
+        logger.info(f"Cleanup completed: deleted {deleted_count} directories")
+
+    except Exception as e:
+        logger.error(f"Error during output folder cleanup: {e}")
+
+
+# Функция для периодической очистки
+def schedule_cleanup():
+    """Запускает очистку output каждые 10 минут в фоновом потоке"""
+    while True:
+        cleanup_output_folder()
+        time.sleep(600)  # Ждём 10 минут (600 секунд)
+
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = os.getenv("SECRET_KEY", "fusionbrain-flask-app-secret")
@@ -66,6 +130,11 @@ Session(app)
 
 # Словарь для хранения статусов задач
 tasks = {}
+
+# Запуск фоновой задачи очистки при старте приложения
+cleanup_thread = Thread(target=schedule_cleanup, daemon=True)
+cleanup_thread.start()
+logger.info("Started output folder cleanup thread")
 
 
 def generate_image_task(task_id, prompt, width, height, style, negative_prompt):
