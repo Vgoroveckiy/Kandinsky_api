@@ -216,8 +216,8 @@
                             <button id="shareBtn" class="btn btn-info me-2">
                                 <i class="fas fa-share-alt me-2"></i>Поделиться
                             </button>
-                            <button id="newGenerationBtn" class="btn btn-secondary">
-                                <i class="fas fa-redo me-2"></i>Новая генерация
+                            <button id="regenerateBtn" class="btn btn-secondary btn-disabled" disabled>
+                                <i class="fas fa-redo me-2"></i>Перегенерация
                             </button>
                         </div>
                     </div>
@@ -263,7 +263,7 @@
             const imageActions = document.getElementById('imageActions');
             const downloadBtn = document.getElementById('downloadBtn');
             const shareBtn = document.getElementById('shareBtn');
-            const newGenerationBtn = document.getElementById('newGenerationBtn');
+            const regenerateBtn = document.getElementById('regenerateBtn');
             const styleSelect = document.getElementById('style');
             
             // Модальное окно
@@ -271,12 +271,13 @@
             const modalImage = document.getElementById('modalImage');
             const modalDownloadBtn = document.getElementById('modalDownloadBtn');
             
-            // Текущая задача
+            // Текущая задача и параметры
             let currentTaskId = null;
             let currentImageUrls = [];
             let currentImagePath = null;
+            let currentFormData = null; // Для хранения параметров формы
             let statusCheckInterval = null;
-
+    
             // Загрузка стилей
             fetchStyles();
             
@@ -284,7 +285,7 @@
             generationForm.addEventListener('submit', startGeneration);
             downloadBtn.addEventListener('click', downloadImage);
             shareBtn.addEventListener('click', shareImage);
-            newGenerationBtn.addEventListener('click', resetUI);
+            regenerateBtn.addEventListener('click', regenerateImage);
             modalDownloadBtn.addEventListener('click', downloadCurrentImage);
             
             // Функция для загрузки стилей
@@ -323,6 +324,7 @@
                 
                 // Собираем данные формы
                 const formData = new FormData(generationForm);
+                currentFormData = formData; // Сохраняем для перегенерации
                 
                 // Отправляем запрос на сервер
                 fetch('/generate', {
@@ -382,6 +384,9 @@
                                 
                                 // Показываем кнопки действий
                                 imageActions.style.display = 'flex';
+                                
+                                // Активируем кнопки Скачать и Перегенерация
+                                toggleActionButtons(true);
                             }
                             
                             enableGenerateButton();
@@ -390,6 +395,7 @@
                             clearInterval(statusCheckInterval);
                             showToast(`Ошибка: ${task.message || 'Произошла ошибка при генерации'}`, 'danger');
                             enableGenerateButton();
+                            toggleActionButtons(false); // Убедимся, что кнопки неактивны
                         }
                     })
                     .catch(error => {
@@ -398,7 +404,73 @@
                         updateProgress(0, `Ошибка: ${error.message}`);
                         showToast(`Ошибка: ${error.message}`, 'danger');
                         enableGenerateButton();
+                        toggleActionButtons(false); // Убедимся, что кнопки неактивны
                     });
+            }
+            
+            // Функция для управления состоянием кнопок Скачать и Перегенерация
+            function toggleActionButtons(enabled) {
+                const downloadBtn = document.getElementById('downloadBtn');
+                const modalDownloadBtn = document.getElementById('modalDownloadBtn');
+                const regenerateBtn = document.getElementById('regenerateBtn');
+                
+                if (enabled) {
+                    downloadBtn.disabled = false;
+                    modalDownloadBtn.disabled = false;
+                    regenerateBtn.disabled = false;
+                    downloadBtn.classList.remove('btn-disabled');
+                    modalDownloadBtn.classList.remove('btn-disabled');
+                    regenerateBtn.classList.remove('btn-disabled');
+                } else {
+                    downloadBtn.disabled = true;
+                    modalDownloadBtn.disabled = true;
+                    regenerateBtn.disabled = true;
+                    downloadBtn.classList.add('btn-disabled');
+                    modalDownloadBtn.classList.add('btn-disabled');
+                    regenerateBtn.classList.add('btn-disabled');
+                }
+            }
+            
+            // Функция для перегенерации изображения
+            function regenerateImage() {
+                if (!currentFormData) {
+                    showToast('Ошибка: параметры генерации не найдены', 'danger');
+                    return;
+                }
+                
+                // Сбрасываем текущие результаты
+                resetResults();
+                
+                // Показываем статус и прогресс
+                statusCard.style.display = 'block';
+                updateProgress(10, 'Подготовка к перегенерации...');
+                
+                // Блокируем кнопку генерации
+                generateBtn.disabled = true;
+                generateBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Генерация...';
+                
+                // Отправляем запрос с сохранёнными параметрами
+                fetch('/generate', {
+                    method: 'POST',
+                    body: currentFormData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        currentTaskId = data.task_id;
+                        // Начинаем проверять статус новой задачи
+                        statusCheckInterval = setInterval(checkTaskStatus, 1000);
+                    } else {
+                        throw new Error(data.error || 'Ошибка при запуске перегенерации');
+                    }
+                })
+                .catch(error => {
+                    console.error('Ошибка:', error);
+                    updateProgress(0, `Ошибка: ${error.message}`);
+                    showToast(`Ошибка: ${error.message}`, 'danger');
+                    enableGenerateButton();
+                    toggleActionButtons(false);
+                });
             }
             
             // Функция для обновления прогресса
@@ -500,13 +572,6 @@
                 showToast('Функция шаринга в разработке', 'info');
             }
             
-            // Функция для сброса UI к начальному состоянию
-            function resetUI() {
-                resetResults();
-                generationForm.reset();
-                enableGenerateButton();
-            }
-            
             // Функция для сброса результатов
             function resetResults() {
                 previewPlaceholder.style.display = 'block';
@@ -523,6 +588,9 @@
                     clearInterval(statusCheckInterval);
                     statusCheckInterval = null;
                 }
+                
+                // Отключаем кнопки Скачать и Перегенерация
+                toggleActionButtons(false);
             }
             
             // Функция для разблокировки кнопки генерации
@@ -584,106 +652,6 @@
                     toast.remove();
                 });
             }
-
-            // Функция для управления состоянием кнопок Скачать
-            function toggleDownloadButtons(enabled) {
-                const downloadBtn = document.getElementById('downloadBtn');
-                const modalDownloadBtn = document.getElementById('modalDownloadBtn');
-                
-                if (enabled) {
-                    downloadBtn.disabled = false;
-                    modalDownloadBtn.disabled = false;
-                    downloadBtn.classList.remove('btn-disabled');
-                    modalDownloadBtn.classList.remove('btn-disabled');
-                } else {
-                    downloadBtn.disabled = true;
-                    modalDownloadBtn.disabled = true;
-                    downloadBtn.classList.add('btn-disabled');
-                    modalDownloadBtn.classList.add('btn-disabled');
-                }
-            }
-
-            // Функция для проверки статуса задачи
-            function checkTaskStatus() {
-                if (!currentTaskId) return;
-                
-                fetch(`/task/${currentTaskId}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        if (!data.success) {
-                            throw new Error(data.error || 'Задача не найдена');
-                        }
-                        
-                        const task = data.task;
-                        
-                        // Обновляем прогресс и статус
-                        updateProgress(task.progress || 0, getStatusMessage(task.status, task.message));
-                        
-                        // Проверяем, завершена ли задача
-                        if (task.status === 'completed') {
-                            clearInterval(statusCheckInterval);
-                            
-                            // Показываем изображение
-                            if (task.image_paths && task.image_paths.length > 0) {
-                                currentImageUrls = task.image_paths.map(img => img.url);
-                                currentImagePath = task.image_paths[0].path;
-                                
-                                // Показываем первое изображение
-                                showImage(currentImageUrls[0]);
-                                
-                                // Если есть несколько изображений, показываем галерею
-                                if (currentImageUrls.length > 1) {
-                                    showGallery(task.image_paths);
-                                }
-                                
-                                // Показываем кнопки действий
-                                imageActions.style.display = 'flex';
-                                
-                                // Активируем кнопки Скачать
-                                toggleDownloadButtons(true);
-                            }
-                            
-                            enableGenerateButton();
-                            
-                        } else if (['error', 'unavailable', 'no_files'].includes(task.status)) {
-                            clearInterval(statusCheckInterval);
-                            showToast(`Ошибка: ${task.message || 'Произошла ошибка при генерации'}`, 'danger');
-                            enableGenerateButton();
-                            toggleDownloadButtons(false); // Убедимся, что кнопки неактивны
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Ошибка при проверке статуса:', error);
-                        clearInterval(statusCheckInterval);
-                        updateProgress(0, `Ошибка: ${error.message}`);
-                        showToast(`Ошибка: ${error.message}`, 'danger');
-                        enableGenerateButton();
-                        toggleDownloadButtons(false); // Убедимся, что кнопки неактивны
-                    });
-            }
-
-            // Функция для сброса результатов
-            function resetResults() {
-                previewPlaceholder.style.display = 'block';
-                previewImage.style.display = 'none';
-                imageGallery.style.display = 'none';
-                imageActions.style.display = 'none';
-                imageGallery.innerHTML = '';
-                
-                currentTaskId = null;
-                currentImageUrls = [];
-                currentImagePath = null;
-                
-                if (statusCheckInterval) {
-                    clearInterval(statusCheckInterval);
-                    statusCheckInterval = null;
-                }
-                
-                // Отключаем кнопки Скачать
-                toggleDownloadButtons(false);
-            }
-
-
         });
     </script>
     
