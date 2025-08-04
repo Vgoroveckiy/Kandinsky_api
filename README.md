@@ -112,7 +112,7 @@ python app.py
 1. Убедитесь, что у вас установлены Docker и Docker Compose
 2. Соберите образ:
    ```bash
-   docker-compose build
+   docker build -t kandinsky-api:latest .
    ```
 3. Запустите контейнер:
    ```bash
@@ -123,7 +123,6 @@ python app.py
 ### Конфигурация
 - Порт приложения: 5000 (можно изменить в docker-compose.yml)
 - Переменные окружения загружаются из .env файла
-- Сгенерированные изображения сохраняются в ./generated_images
 
 ## Структура проекта
 Проект разделен на несколько модулей:
