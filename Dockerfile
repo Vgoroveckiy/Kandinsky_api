@@ -12,6 +12,9 @@ WORKDIR /app
 RUN mkdir -p /app/output && \
     mkdir -p /app/flask_session
 
+# Копируем исполняемый файл gunicorn
+COPY --from=builder /usr/local/bin/gunicorn /usr/local/bin/
+
 COPY --from=builder /usr/local/lib/python3.11/site-packages /usr/local/lib/python3.11/site-packages
 COPY . .
 CMD ["gunicorn", "--bind", "0.0.0.0:5000", "app:app"]
