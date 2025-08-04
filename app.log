@@ -691,3 +691,15 @@
 2025-04-18 17:08:23,760 - INFO - Initializing ConfigManager
 2025-04-18 17:08:23,760 - INFO - Cleanup completed: deleted 0 directories
 2025-04-18 17:08:23,761 - INFO - Configuration validated successfully
+2025-08-04 10:26:40,843 - INFO - Logging initialized
+2025-08-04 10:26:41,019 - INFO - Starting cleanup of D:\PythonProjects\Kandinsky_api\output (age > 24.0 hours)
+2025-08-04 10:26:41,019 - INFO - Started output folder cleanup thread
+2025-08-04 10:26:41,021 - INFO - Initializing ConfigManager
+2025-08-04 10:26:41,021 - INFO - Cleanup completed: deleted 0 directories
+2025-08-04 10:26:41,022 - INFO - Configuration validated successfully
+2025-08-04 10:26:45,069 - INFO - Logging initialized
+2025-08-04 10:26:45,119 - INFO - Starting cleanup of D:\PythonProjects\Kandinsky_api\output (age > 24.0 hours)
+2025-08-04 10:26:45,119 - INFO - Started output folder cleanup thread
+2025-08-04 10:26:45,122 - INFO - Initializing ConfigManager
+2025-08-04 10:26:45,122 - INFO - Cleanup completed: deleted 0 directories
+2025-08-04 10:26:45,122 - INFO - Configuration validated successfully

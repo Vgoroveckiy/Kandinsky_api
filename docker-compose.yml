@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    container_name: kandinsky_api_web
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./generated_images:/app/generated_images
+    env_file:
+      - .env
+    environment:
+      - FLASK_ENV=production
+    restart: unless-stopped
