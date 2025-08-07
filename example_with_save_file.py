@@ -19,6 +19,17 @@ class FusionBrainAPI:
         }
 
     def get_pipeline(self):
+        """
+        Получает идентификатор pipeline из API.
+
+        Returns:
+            str: Идентификатор pipeline.
+
+        Raises:
+            requests.exceptions.RequestException: Если произошла сетевая ошибка.
+            ValueError: Если ответ API имеет неожиданный формат.
+            Exception: Для непредвиденных ошибок.
+        """
         try:
             response = requests.get(
                 self.URL + "key/api/v1/pipelines", headers=self.AUTH_HEADERS
@@ -35,6 +46,24 @@ class FusionBrainAPI:
             raise
 
     def generate(self, prompt, pipeline, images, width, height):
+        """
+        Инициирует генерацию изображения через API.
+
+        Args:
+            prompt (str): Текстовое описание для генерации изображения.
+            pipeline (str): Идентификатор pipeline.
+            images (int): Количество сгенеренных изображений.
+            width (int): Ширина изображения в пикселях.
+            height (int): Высота изображения в пикселях.
+
+        Returns:
+            str: UUID запроса генерации.
+
+        Raises:
+            requests.exceptions.RequestException: Если запрос завершился с ошибкой HTTP.
+            ValueError: Если ответ API не содержит UUID.
+            Exception: Для непредвиденных ошибок.
+        """
         params = {
             "type": "GENERATE",
             "numImages": images,
@@ -64,6 +93,22 @@ class FusionBrainAPI:
         return data["uuid"]
 
     def check_generation(self, request_id, attempts=10, delay=10):
+        """
+        Проверяет статус генерации изображения.
+
+        Args:
+            request_id (str): UUID запроса генерации.
+            attempts (int): Максимальное количество попыток проверки статуса.
+            delay (float): Задержка между попытками (в секундах).
+
+        Returns:
+            list: Список файлов, полученных в результате генерации.
+
+        Raises:
+            requests.exceptions.RequestException: Если произошла сетевая ошибка.
+            TimeoutError: Если генерация не завершилась в течение заданного времени.
+            Exception: Для непредвиденных ошибок.
+        """
         try:
             while attempts > 0:
                 response = requests.get(
@@ -94,7 +139,17 @@ class FusionBrainAPI:
             raise
 
     def save_image(self, image_data, save_path):
-        """Сохраняет изображение по URL или base64-строке."""
+        """
+        Сохраняет изображение на диск из данных URL или base64-строки.
+
+        Args:
+            image_data (str): Данные изображения, которые могут быть URL или base64-строкой.
+            save_path (str): Путь для сохранения изображения.
+
+        Raises:
+            Exception: Если не удалось скачать изображение по URL или декодировать base64-строку.
+        """
+
         try:
             # Проверяем, является ли строка валидным URL
             parsed_url = urlparse(image_data)

@@ -21,9 +21,38 @@ logging.basicConfig(
 
 
 # Модифицированный клиент FusionBrain с поддержкой отслеживания прогресса
+"""
+Клиент для взаимодействия с API FusionBrain.
+
+Этот класс предоставляет функциональность для взаимодействия с API FusionBrain для генерации изображений из текстовых описаний.
+Он обрабатывает аутентификацию, выбор модели, генерацию изображений и отслеживание прогресса.
+
+Атрибуты:
+    api_key (str): Ключ API для сервиса FusionBrain.
+    secret_key (str): Секретный ключ для сервиса FusionBrain.
+    base_url (str): Базовый URL для API FusionBrain.
+    headers (dict): HTTP-заголовки для запросов API.
+    tasks_progress (dict): Словарь для отслеживания прогресса задач генерации.
+    tasks_results (dict): Словарь для хранения результатов выполненных задач.
+
+Raises:
+    ValueError: Если ключ API или секретный ключ не были указаны ни в параметрах, ни в переменных окружения.
+"""
+
+
 class FusionBrainClient:
     def __init__(self, api_key=None, secret_key=None):
         # Загрузка переменных окружения
+        """
+        Инициализирует клиент FusionBrain.
+
+        Args:
+            api_key (str, optional): API Key для FusionBrain. Defaults to None.
+            secret_key (str, optional): Secret Key для FusionBrain. Defaults to None.
+
+        Raises:
+            ValueError: Если API Key и Secret Key не были указаны ни в параметрах, ни в переменных окружения.
+        """
         load_dotenv()
 
         # Если ключи не переданы явно, берём их из переменных окружения
@@ -49,7 +78,15 @@ class FusionBrainClient:
         self.tasks_results = {}
 
     def get_models(self):
-        """Получает список доступных pipelines (моделей) из API."""
+        """
+        Получает список моделей, доступных в FusionBrain.
+
+        Returns:
+            list: Список моделей в формате [{"id": <id>, "name": <name>}, ...].
+
+        Raises:
+            ValueError: Если не удалось получить список моделей.
+        """
         try:
             logging.info(
                 "Requesting pipelines from %skey/api/v1/pipelines", self.base_url
@@ -340,6 +377,10 @@ client = FusionBrainClient()
 
 @app.route("/")
 def index():
+    """
+    Главная страница.
+    Отображает форму для ввода текстового описания и списка доступных моделей.
+    """
     try:
         # Получаем список моделей для отображения в форме
         models = client.get_models()
@@ -353,6 +394,29 @@ def index():
 @app.route("/generate", methods=["POST"])
 def generate():
     # Получаем параметры из формы
+    """
+    Обрабатывает POST-запросы для генерации изображений.
+
+    Эндпоинт получает параметры генерации (промпт, отрицательный промпт, ID модели, размеры и т.д.)
+    из отправленной формы и запускает асинхронную задачу генерации изображений. Возвращает ID задачи
+    для отслеживания прогресса генерации.
+
+    Аргументы (данные формы):
+        prompt (str): Обязательно. Текстовый промпт для генерации изображения.
+        negative_prompt (str): Необязательно. Отрицательный промпт для исключения из генерации.
+        model_id (str): Обязательно. ID модели, используемой для генерации.
+        width (int): Необязательно. Ширина сгенерированного изображения (по умолчанию: 1024).
+        height (int): Необязательно. Высота сгенерированного изображения (по умолчанию: 1024).
+        images_num (int): Необязательно. Количество изображений для генерации (по умолчанию: 1).
+        style (str): Необязательно. Стиль, применяемый к сгенерированным изображениям.
+
+    Возвращает:
+        JSON: Содержит task_id для асинхронной задачи генерации в случае успеха,
+              или сообщение об ошибке, если проверка не удалась.
+
+    Исключения:
+        400 Bad Request: Если отсутствуют обязательные параметры (prompt или model_id).
+    """
     prompt = request.form.get("prompt", "")
     negative_prompt = request.form.get("negative_prompt", "")
     model_id = request.form.get("model_id", "")
@@ -401,6 +465,16 @@ def result(task_id):
 
 @app.route("/save/<task_id>/<int:image_index>", methods=["POST"])
 def save_image(task_id, image_index):
+    """
+    Сохраняет выбранное изображение на диск.
+
+    Args:
+        task_id (str): Идентификатор задачи.
+        image_index (int): Индекс изображения в списке результатов.
+
+    Returns:
+        JSON: Имя файла, если изображение сохранено, или сообщение об ошибке.
+    """
     result_data = client.get_task_result(task_id)
 
     if not result_data or image_index >= len(result_data):

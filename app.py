@@ -63,9 +63,13 @@ logger = logging.getLogger(__name__)
 logger.info("Logging initialized")
 
 
-# Функция очистки старых подкаталогов в output
 def cleanup_output_folder():
-    """Удаляет подкаталоги в output, старше OUTPUT_CLEANUP_AGE_HOURS"""
+    """
+    Очищает папку output от старых подкаталогов.
+
+    Подкаталоги удаляются, если они старше OUTPUT_CLEANUP_AGE_HOURS.
+    Логгирует информацию о процессе очистки.
+    """
     output_folder = os.path.abspath(app.config["UPLOAD_FOLDER"])
     cleanup_age_seconds = output_cleanup_age_hours * 3600  # Конвертируем часы в секунды
     current_time = time.time()
@@ -113,9 +117,12 @@ def cleanup_output_folder():
         logger.error(f"Error during output folder cleanup: {e}")
 
 
-# Функция для периодической очистки
 def schedule_cleanup():
-    """Запускает очистку output каждые 10 минут в фоновом потоке"""
+    """
+    Запускает функцию cleanup_output_folder каждые 10 минут в фоновом потоке.
+
+    Работает бесконечно в цикле.
+    """
     while True:
         cleanup_output_folder()
         time.sleep(600)  # Ждём 10 минут (600 секунд)
@@ -138,7 +145,20 @@ logger.info("Started output folder cleanup thread")
 
 
 def generate_image_task(task_id, prompt, width, height, style, negative_prompt):
-    """Фоновая задача для генерации изображения"""
+    """
+    Фоновая задача для генерации изображения по заданному промпту.
+
+    Args:
+        task_id (str): Уникальный идентификатор задачи.
+        prompt (str): Текстовый промпт для генерации изображения.
+        width (int): Ширина изображения.
+        height (int): Высота изображения.
+        style (str): Стиль генерации изображения.
+        negative_prompt (str): Отрицательный промпт для ограничений.
+
+    Возвращает:
+        None. Результат сохраняется в tasks.
+    """
     try:
         # Обновляем статус задачи
         tasks[task_id] = {"status": "initializing", "progress": 10}
@@ -230,7 +250,6 @@ def generate_image_task(task_id, prompt, width, height, style, negative_prompt):
             image_paths.append(
                 {
                     "path": image_path,
-                    # "path": os.path.join(task_id, filename),
                     "url": f"/image/{task_id}/{filename}",
                 }
             )
@@ -254,7 +273,15 @@ def index():
 
 @app.route("/generate", methods=["POST"])
 def generate():
-    """Маршрут для запуска генерации изображения"""
+    """
+    Запускает задачу генерации изображения.
+
+    Args:
+        request: POST-запрос с данными формы.
+
+    Возвращает:
+        JSON: Статус задачи и task_id.
+    """
     try:
         # Получаем параметры из формы
         prompt = request.form["prompt"]
@@ -297,7 +324,15 @@ def generate():
 
 @app.route("/task/<task_id>", methods=["GET"])
 def task_status(task_id):
-    """API-маршрут для получения статуса задачи"""
+    """
+    Возвращает статус текущей задачи.
+
+    Args:
+        task_id (str): Идентификатор задачи.
+
+    Возвращает:
+        JSON: Статус задачи и связанные данные.
+    """
     if task_id not in tasks:
         return jsonify({"success": False, "error": "Task not found"}), 404
 
@@ -319,44 +354,71 @@ def task_status(task_id):
 
 @app.route("/image/<task_id>/<filename>")
 def serve_image(task_id, filename):
-    """Маршрут для отдачи сгенерированного изображения"""
-    task_folder = os.path.join(app.config["UPLOAD_FOLDER"], task_id)
-    return send_from_directory(task_folder, filename)
+    """
+    Отправляет сгенерированное изображение по указанному пути.
+
+    Args:
+        task_id (str): Идентификатор задачи.
+        filename (str): Имя файла изображения.
+
+    Возвращает:
+         Отправляет файл изображения.
+     """
+     task_folder = os.path.join(app.config["UPLOAD_FOLDER"], task_id)
+     return send_from_directory(task_folder, filename)
 
 
 @app.route("/download/<task_id>/<filename>")
 def download_image(task_id, filename):
-    """Маршрут для скачивания изображения"""
-    task_folder = os.path.join(app.config["UPLOAD_FOLDER"], task_id)
-    return send_from_directory(
-        task_folder,
-        filename,
-        as_attachment=True,
-        download_name=secure_filename(filename),
-    )
+    """
+     Обрабатывает запрос на скачивание сгенерированного изображения.
+
+     Args:
+         task_id (str): Идентификатор задачи.
+         filename (str): Имя файла изображения.
+
+     Возвращает:
+         Отправляет файл как аттачмент.
+     """
+     task_folder = os.path.join(app.config["UPLOAD_FOLDER"], task_id)
+     return send_from_directory(
+         task_folder,
+         filename,
+         as_attachment=True,
+         download_name=secure_filename(filename),
+     )
 
 
 @app.route("/styles")
 def get_styles():
-    """Маршрут для получения списка доступных стилей (заглушка)"""
-    styles = [
-        {"id": "DEFAULT", "name": "По умолчанию"},
-        {"id": "ANIME", "name": "Аниме"},
-        {"id": "PORTRAIT", "name": "Портрет"},
-        {"id": "REALISTIC", "name": "Реалистичный"},
-        {"id": "UHD", "name": "Ультра HD"},
-    ]
-    return jsonify(styles)
+     """
+     Возвращает список доступных стилей генерации изображений.
+
+     Возвращает:
+         JSON: Список стилей с идентификаторами и названиями.
+     """
+     styles = [
+         {"id": "DEFAULT", "name": "По умолчанию"},
+         {"id": "ANIME", "name": "Аниме"},
+         {"id": "PORTRAIT", "name": "Портрет"},
+         {"id": "REALISTIC", "name": "Реалистичный"},
+         {"id": "UHD", "name": "Ультра HD"},
+     ]
+     return jsonify(styles)
 
 
 if __name__ == "__main__":
-    # Проверка наличия конфигурации перед запуском
-    try:
-        config = ConfigManager()
-        config.validate()
-        os.makedirs(app.config["UPLOAD_FOLDER"], exist_ok=True)
-        app.run(host="0.0.0.0", port=5000, debug=True)
-    except ValueError as e:
-        logger.error(f"Configuration error: {e}")
-        print(f"Error: {e}")
-        print("Please check your API credentials in .env file")
+     """
+     Основной блок запуска приложения.
+
+     Выполняет проверку конфигурации перед запуском сервера.
+     """
+     try:
+         config = ConfigManager()
+         config.validate()
+         os.makedirs(app.config["UPLOAD_FOLDER"], exist_ok=True)
+         app.run(host="0.0.0.0", port=5000, debug=True)
+     except ValueError as e:
+         logger.error(f"Configuration error: {e}")
+         print(f"Error: {e}")
+         print("Please check your API credentials in .env file")
